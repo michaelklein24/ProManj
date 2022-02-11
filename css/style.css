@@ -312,6 +312,7 @@ main {
 
 .messageInput {
     width: 80%;
+    box-shadow: 0 0 0 3px #37478596;
 }
 
 #YourWorkspacesSection {
@@ -404,6 +405,18 @@ main {
     color:white;
 }
 
+#submitLocation {
+    height:auto;
+    width: 23px;
+ 
+}
+
+#locationDiv {
+   background-color: #516DFF;
+    padding:9px;
+    border-radius: 360px;
+    cursor:pointer;
+}
 
 @media screen and (max-width:1200px) {
     #bg-color-projects-dashboard {
@@ -460,13 +473,15 @@ main {
    flex-basis: 60%;
    background-color: #DDE8FD;
    border-radius: 6px;
-   padding:15px
+   padding:15px;
+ 
 }
 
 #memberManagement {
     background-color: #DDE8FD;
     border-radius: 6px;
-    padding:15px
+    padding:15px;
+    flex-grow:1;
 }
 
 #membersList {
@@ -500,6 +515,14 @@ main {
     font-weight: bold;
     font-size: 24px;
     padding:6px
+}
+
+.onlineDot {
+    height:5px;
+    width:5px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 360px;
 }
 
 @media screen and (max-width:1200px) {
