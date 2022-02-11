@@ -1,0 +1,514 @@
+:root {
+    --darkBlue: #374785;
+    --lightBlue: #A8D0E6;
+    --grey: #C4C4C4;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0 0;
+}
+
+/* HEADER BAR AT TOP */
+#project-logo {
+    background-color: var(--grey);
+    border-radius: 8px;
+    width: 59px;
+    height: 59px;
+}
+
+header div:first-child:hover {
+    cursor: pointer;
+}
+
+#emailInput,
+ #passwordInput,
+ #firstNameInput,
+ #lastNameInput,
+ #verifyPasswordInput {
+    height: 4vh;
+    background-color: #9f9f9f46;
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: width .35s ease-in-out;
+    padding-left: 10px;
+}
+
+#emailInputHomepage {
+    background-color: white;
+    height: 4vh;
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: width .35s ease-in-out;
+    padding-left: 10px;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #37478596;
+}
+
+#loginBtn {
+    cursor: pointer;
+    color: var(--darkBlue)
+}
+
+#loginBtn:hover {
+    text-decoration: underline;
+}
+
+.signupBtn {
+    background-color: #375685;
+    font-weight:600;
+    color: white;
+    border-radius: 7px;
+    padding: 8px 8px;
+    border: none;
+}
+
+.signupBtn:hover {
+    background-color: var(--darkBlue);
+    cursor: pointer;
+}
+
+.signupBtn:active {
+    box-shadow: 0 0 5px 5px #37478531;
+}
+
+header {
+    height: auto;
+    padding:2vh;
+    background-color: var(--lightBlue);
+}
+
+main {
+    height: 89.6vh;
+    background-image: linear-gradient(#A8D0E6, #374785);
+    /* position:relative; */
+}
+
+#projectName {
+    font-weight: bold;
+    font-size: 5vh;
+}
+
+/* HOMEPAGE */
+
+#homepage-project-desc {
+    font-weight: 700;
+}
+
+#homepage-img {
+    height: 100%;
+}
+
+
+#mainHomepageDiv {
+    overflow: hidden;
+    padding-top:5vh;
+}
+
+#column1 {
+    padding: 10vh;
+    min-width: 552px;
+    max-width: 700px; 
+}
+
+@media screen and (max-width: 1200px) {
+    #mainHomepageDiv {
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+        /* transition: .35s ease-in-out; */
+        padding: 0;
+    }
+
+    #homepage-img {
+        /* flex-basis: 100%;
+        height: auto */
+        width: 120%;
+    }
+    
+    #column1 {
+        padding:2vh 8vw ;
+        min-width: 0;
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 572px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1vh;
+    }
+    #homepage-project-desc {
+        font-size: 32px;
+    }
+    main {
+        height:85vh;
+        /* background-color: #A8D0E6 */
+        /* background: linear-gradient(#A8D0E6, #A8D0E6) */
+    }
+}
+
+/* LOGIN AND SIGN UP PAGES */
+
+#loginBlock {
+    background-color: white;
+    width: 440px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px 4px #a8a8a8
+}
+
+#submitEmail,
+#submitLogin,
+#submitSignup {
+    border: none;
+    border-radius: 6px;
+    background-color: #51DB21;
+    color: white;
+    font-weight: bold;
+    margin:0;
+    height: 4vh;
+}
+
+/* input[type=text] {
+    background-color: #d4d4d4;
+    margin:0;
+} */
+
+#submitEmail:hover,
+#submitLogin:hover,
+#submitSignup:hover {
+    background-color: #39a017e3;
+}
+
+/* input[type=password] {
+    background-color: #d4d4d4;
+    margin:0;
+} */
+
+.futureLogin {
+    border: 2px #9F9F9F solid;
+    height: 4vh;
+    border-radius: 6px;
+    box-shadow: 0 0 4px 2px #00000048;
+}
+
+#cantLogIn {
+    font-size: 14px;
+    text-align:center;
+}
+
+#loginBtn {
+    color: #007bc2
+}
+
+/* main {
+    padding-top: 5vh;
+} */
+
+@media screen and (max-width: 572px) {
+    #loginBlock {
+        width: 90vw;
+        padding: 5vw;
+    }
+    main {
+        padding-top: 1vh;
+    }
+}
+
+#profileCircle {
+    padding: 1vh;
+    background-color: #24305E;
+    border-radius: 360px;
+    color:white;
+}
+
+#bg-color-projects-dashboard {
+    background-color: #E9E9E9;
+    padding:2vh;
+    height:89.7vh;
+}
+
+#messengerWord {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#messagesColumn {
+    background-color: white;
+    padding:18px;
+    border-radius: 6px;
+    flex-basis: 50%;
+    box-shadow: 0 0 100px -43px #001789b6;
+    height: 100%;
+}
+
+#messagesList {
+    padding-top:20px;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+#addMessageIcon {
+    height:31px;
+    width:31px;
+    padding:5px;
+    border-radius: 6px;
+}
+
+#addMessageIcon:hover {
+    background-color: rgba(128, 128, 128, 0.308);
+    cursor: pointer;
+}
+
+#addMessageIcon:active {
+    background-color: rgba(128, 128, 128, 0.534);
+}
+
+.profileCircle {
+    padding:0.8vh;
+    background-color: #24305E;
+    border-radius: 360px;
+    color:white;
+}
+
+.messageCollapsible {
+    display:none;
+    border-radius: 6px;
+    height:50vh;
+    padding:8px;
+    background-color: #C4C4C4;
+}
+
+.messageListing {
+    padding:10px;
+    border-radius: 6px;
+}
+
+.messageContact {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.messageListing:hover {
+    cursor: pointer;
+    background-color: #C4C4C4;
+}
+
+.messagesContainer {
+    height: 90%;
+    overflow-y: scroll;
+    
+}
+
+.messageInput {
+    width: 80%;
+}
+
+#YourWorkspacesSection {
+    background-color: #DDE8FD;
+    border-radius: 6px;
+    padding:18px;
+    box-shadow: 0 0 100px -43px #0006af73;
+    height: 70%;
+}
+
+#workspaceSectionTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color:rgba(0, 0, 0, 0.562)
+}
+
+#projectList {
+    height:auto;
+    overflow-y: scroll;
+}
+
+.projectItemCustom {
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.projectItemCustom:hover {
+    background-color: #24305e34;
+    cursor: pointer;
+}
+
+.projectItemCustom:active {
+    background-color: #24305e55;
+}
+
+#projectLogo {
+    font-size: 24px;
+    font-weight: bold;
+    color:white;
+    background-color: #FF5C5C;
+    padding:3px 15px;
+    border-radius: 6px;
+}
+
+#projectTitle {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+#projectDetails {
+    font-size: 16px;
+}
+
+#ManageWorkspacesSection {
+    background-color: #DDE8FD;
+    border-radius: 6px;
+    padding:18px;
+    box-shadow: 0 0 100px -43px #0006af73;
+    height: 25vh;
+}
+
+.manageWorkspaceOption {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.manageWorkspaceOption:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.messageInput {
+    background-color: white;
+    border-radius:100px;
+    padding:7px 0 7px 10px;
+
+    border: none;
+}
+
+.submitMessage {
+    width:15%;
+    background-color: white;
+    border-radius:100px;
+    border:none;
+    background-color: #516DFF;
+    color:white;
+}
+
+
+@media screen and (max-width:1200px) {
+    #bg-color-projects-dashboard {
+        flex-wrap: wrap-reverse;
+        height:auto;
+    }
+
+        /* #workspaceSectionTitle {
+            height:auto;
+        } */
+
+    
+    #messagesColumn {
+        flex-basis: 100%;
+        height:80vh;
+    }
+}
+
+
+
+#messagesColumn1 {
+    background-color: white;
+    padding:18px;
+    border-radius: 6px;
+    width:470px;
+    box-shadow: 0 0 100px -43px #001789b6;
+    height: auto;
+}
+
+#trelloColumn {
+    height: auto;
+}
+
+#trelloSection {
+    height:70%;
+}
+
+#memberOptionsRow {
+    height:30%;
+}
+
+#projectTitle {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+#trelloBoard {
+    width:100%;
+    height:100%;
+    overflow-x: scroll;
+}
+
+#membersSection {
+   flex-basis: 60%;
+   background-color: #DDE8FD;
+   border-radius: 6px;
+   padding:15px
+}
+
+#memberManagement {
+    background-color: #DDE8FD;
+    border-radius: 6px;
+    padding:15px
+}
+
+#membersList {
+    height:187px;
+    overflow-y: scroll;
+}
+
+.memberName {
+    font-size: 20px;
+}
+
+.memberInstruction {
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#inviteButton {
+    background-color: #374785;
+    border-radius: 6px;
+    color:white;
+    font-weight: bold;
+    font-size: 24px;
+    padding:6px
+}
+
+#leaveButton {
+    background-color: #B90000;
+    border-radius: 6px;
+    color:white;
+    font-weight: bold;
+    font-size: 24px;
+    padding:6px
+}
+
+@media screen and (max-width:1200px) {
+    #bg-color-projects-dashboard {
+        flex-wrap: wrap-reverse;
+    }
+
+    #messagesColumn1 {
+        flex-basis: 100%;
+        height:80vh;
+    }
+}
