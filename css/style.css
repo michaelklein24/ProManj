@@ -393,7 +393,7 @@ main {
     border-radius:100px;
     padding:7px 0 7px 10px;
 
-    border: none;
+    border: none; 
 }
 
 .submitMessage {
