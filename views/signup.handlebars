@@ -1,0 +1,24 @@
+<header class="d-flex justify-content-between container-fluid">
+        <div class="d-flex gap-3 align-items-center">
+            <div id="project-logo"></div>
+            <h1 id="projectName">ProManj</h1>
+        </div>
+        {{>loginSignup}}
+    </header>
+    <main>
+        <div class="d-flex flex-column gap-4" id="loginBlock">
+            <h3 class="text-center fs-5">Sign up for ProManj</h3>
+            <form class="d-flex flex-column gap-3" id="signup-form">
+                <input type="text" placeholder="Enter first name" id="firstNameInput">
+                <input type="text" placeholder="Enter last name" id="lastNameInput">
+                <input type="text" placeholder="Enter email" id="emailInput">
+                <input type="password" placeholder="Enter password" id="passwordInput">
+                <input type="password" placeholder="Re-enter password" id="verifyPasswordInput">
+                <input type="submit" value="Sign up" id="submitSignup">
+            </form>
+
+            <hr>
+            <h4 id="cantLogIn">Already have an account? <span id="loginBtn">Log in here</span></h4>
+        </div>
+    </main>
+    <script src="js/signup.js"></script>
