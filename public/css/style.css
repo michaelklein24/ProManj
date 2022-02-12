@@ -586,8 +586,10 @@ main {
 #profileOptions {
     position:absolute;
     background-color: white;
-    right:1vw;
+    right:1.2vw;
+    top:12vh;
     border-radius: 6px;
+    z-index: 1;
 }
 
 .hideDisplay {
@@ -620,6 +622,43 @@ main {
     border-radius: 6px;
     padding:6px 10px;
     font-size: 24px;
+}
+
+.modal-open {
+    padding-right: 0 !important;
+    overflow: auto !important;
+}
+
+#updateFirstNameInput,
+#updateLastNameInput,
+#updateEmailInput,
+#enterPasswordInput {
+    padding: 2px 10px;
+    width: 80%;
+    border:none;
+    background-color: #C4C4C4;
+    color:black;
+    border-radius: 6px;
+    font-size: 24px;
+}
+
+#updateFirstNameInput::placeholder,
+#updateLastNameInput::placeholder,
+#updateEmailInput::placeholder,
+#enterPasswordInput::placeholder {
+    color:black;
+}
+
+#updateProfileSubmit {
+    border:none;
+    background-color: #374785;
+    border-radius: 6px;
+    color:white;
+    font-size: 24px;
+    font-weight: bold;
+    width:35%;
+    padding:6px 0;
+    margin:0 auto;
 }
 
 @media screen and (max-width:1200px) {

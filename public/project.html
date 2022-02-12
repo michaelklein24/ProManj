@@ -137,7 +137,8 @@
 
             <!-- Logout and Update Profile Popup -->
             <div id="profileOptions" class="d-flex flex-column p-4 gap-3 justify-content-around hideDisplay">
-                <h3 id="editProfileButton" class="text-center data-bs-toggle="modal" data-bs-target="#editProfileModel" >Edit Profile</h3>
+                <h3 id="editProfileButton" class="text-center" data-bs-toggle="modal"
+                    data-bs-target="#editProfileModel">Edit Profile</h3>
                 <h3 id="logoutButton" class="text-center">Logout</h3>
             </div>
 
@@ -172,20 +173,26 @@
             </div>
 
             <!-- Modal for updating Profile -->
-            <!-- <div class="modal fade" id="editProfileModel" tabindex="-1">
+            <div class="modal fade" id="editProfileModel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="d-flex flex-column gap-4 p-4 align-items-center">
-                            <h2 class="text-center bold">Are you sure?</h2>
-                            <h4 class="text-center">You will no longer have access to this workspace unless someone adds
-                                you again</h3>
-                                <h3 class="bold text-white text-center" id="removeMemberButton">I'm sure! Remove me from
-                                    Project</h3>
-                        </div>
+                        <form class="d-flex flex-column gap-4 p-4" id="updateProfile">
+                            <h2 class="text-center bold">Update your profile</h2>
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <input type="text" value="Michael" placeholder="Enter first name"
+                                    id="updateFirstNameInput">
+                                <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
+                                <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
+                                    id="updateEmailInput">
+                                <input type="password" placeholder="Enter your password" id="enterPasswordInput">
+                            </div>
+
+                            <input type="submit" id="updateProfileSubmit">
+                        </form>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
                     </div>
                 </div>
-            </div> -->
+            </div>
 
 
 
