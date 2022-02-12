@@ -209,7 +209,7 @@
                     <h2 id="workspaceSectionTitle">YOUR WORKSPACES</h2>
                     <hr>
                     <div class="d-flex flex-column gap-5">
-                        <h3 id="startProject" class="manageWorkspaceOption">Starting a new project?</h3>
+                        <h3 id="startProject" class="manageWorkspaceOption"  data-bs-toggle="modal" data-bs-target="#addNewProjectModal">Starting a new project?</h3>
                         <h3 id="searchForProject" class="manageWorkspaceOption">Search for an existing project?</h3>
                     </div>
                 </div>
@@ -238,6 +238,37 @@
                     </div>
 
                     <input type="submit" id="updateProfileSubmit">
+                </form>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for creating Project -->
+    <div class="modal fade" id="addNewProjectModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form class="d-flex flex-column gap-4 p-4" id="createProject">
+                    <h2 class="text-center bold">Start a New Project</h2>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectNameInput" class="bold">Project Name</label>
+                            <input type="text" placeholder="Enter project name" id="projectNameInput">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectDescInput" class="bold">Project Description</label>
+                            <textarea type="text"  placeholder="Enter description" id="projectDescInput" rows="5" maxlength="100"></textarea>
+                            <h6 class="text-end"><span>100</span> characters remaining</h6>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectEmailInput" class="bold">Add Members</label>
+                            <div class="d-flex gap-3">
+                                <input type="text"  placeholder="Enter email" id="projectEmailInput">
+                                <h4 id="addEmailButton">Add</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" id="createProjectSubmit" value="Create">
                 </form>
                 <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"></button> -->
             </div>

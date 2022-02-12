@@ -649,6 +649,8 @@ main {
     color:black;
 }
 
+
+/* FORM FOR STARTING A NEW PROJECT */
 #updateProfileSubmit {
     border:none;
     background-color: #374785;
@@ -659,6 +661,52 @@ main {
     width:35%;
     padding:6px 0;
     margin:0 auto;
+}
+
+#projectNameInput {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color: #d8d4d47e;
+}
+
+#projectDescInput {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    height: 7vh;
+    background-color: #d8d4d47e;
+}
+
+#projectEmailInput {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    background-color: #d8d4d47e;
+    flex: 1
+}
+
+#addEmailButton {
+    border: none;
+    border-radius: 6px;
+    background-color: #6EC345;
+    color: white;
+    padding:6px 10px;
+    font-size: 20px;
+}
+
+#createProjectSubmit {
+    background-color: #536DF4;
+    color:white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding:6px 10px;
+    flex-shrink: 0;
+}
+
+#createProjectSubmit:hover {
+    background-color: #3a4eb3;
 }
 
 @media screen and (max-width:1200px) {
