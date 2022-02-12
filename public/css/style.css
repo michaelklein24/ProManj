@@ -695,6 +695,18 @@ main {
     font-size: 20px;
 }
 
+#addEmailButton:hover {
+    background-color: #518f32;
+    cursor: pointer;
+}
+
+.emailListing {
+    color: white;
+    padding: 2px 8px;
+    background-color: #6ab5e0;
+    border-radius: 360px;
+}
+
 #createProjectSubmit {
     background-color: #536DF4;
     color:white;
