@@ -1,36 +1,43 @@
 const User = require('./User');
 const Project = require('./Project');
-
-User.hasMany(Project, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
-
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
-});
-
-module.exports = { User, Project };
+const usersToProjects = require('./usersToProjects');
 
 
-//need to add projects to many users
 
-// Traveller.belongsToMany(Location, {
-//     // Define the third table needed to store the foreign keys
-//     through: {
-//       model: Trip,
-//       unique: false
-//     },
-//     // Define an alias for when data is retrieved
-//     as: 'planned_trips'
-//   });
+Project.belongsToMany(User, {
+    // Define the third table needed to store the foreign keys
+    through: {
+      model: usersToProjects,
+      unique: false
+    },
+    // Define an alias for when data is retrieved
+
+  });
   
-//   Location.belongsToMany(Traveller, {
-//     // Define the third table needed to store the foreign keys
-//     through: {
-//       model: Trip,
-//       unique: false
-//     },
-//     // Define an alias for when data is retrieved
-//     as: 'location_travellers'
-//   });
+  User.belongsToMany(Project, {
+    // Define the third table needed to store the foreign keys
+    through: {
+      model: usersToProjects,
+      unique: false
+    },
+    // Define an alias for when data is retrieved
+  });
+
+ module.exports = { User, Project, usersToProjects };
+
+
+
+
+  // User.hasMany(Project, {
+    //   foreignKey: 'user_id',
+    //   onDelete: 'CASCADE'
+    // });
+    
+    // Project.belongsToMany(User, {
+    //   foreignKey: 'user_id'
+    // });
+    
+   
+    
+    
+    // //need to add projects to many users

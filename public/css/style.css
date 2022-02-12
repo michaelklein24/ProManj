@@ -53,6 +53,10 @@ input:focus {
     box-shadow: 0 0 0 3px #37478596;
 }
 
+a{
+    text-decoration: none;
+}
+
 #loginBtn {
     cursor: pointer;
     color: var(--darkBlue)
@@ -69,6 +73,8 @@ input:focus {
     border-radius: 7px;
     padding: 8px 8px;
     border: none;
+    
+
 }
 
 .signupBtn:hover {
@@ -215,7 +221,10 @@ main {
 }
 
 #loginBtn {
-    color: #007bc2
+    
+    color: #007bc2;
+    
+    
 }
 
 /* main {

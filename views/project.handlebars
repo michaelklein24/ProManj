@@ -1,0 +1,87 @@
+<header class="d-flex justify-content-between container-fluid">
+        <div class="d-flex gap-3 align-items-center">
+            <div id="project-logo"></div>
+            <h1 id="projectName">ProManj</h1>
+        </div>
+        <div class="d-flex gap-3 align-items-center align-self-center" id="loginSignUpBtns">
+            <h2 id="helloText">Hello {{first_name}}!</h2>
+            <div id="profileCircle">MK</div>
+        </div>
+    </header>
+    <main>
+        <div class="d-flex gap-4" id="bg-color-projects-dashboard">
+            <div id="messagesColumn1" class="d-flex flex-column gap-3">
+                <!-- <div class="d-flex justify-content-between"> -->
+                    <h2 id="messengerWord">Chat Channel</h2>
+                <!-- </div> -->
+
+                <div class="d-flex flex-column gap-3" id="messagesList">
+                  <div id="messages" class="chat__messages">
+                  </div>  
+                
+                </div>
+                <form class="sendMessage d-flex justify-content-between gap-3">
+                    <input type="text" name="message"placeholder="type message here" class="messageInput">
+                    <input type="submit" value="send" class="submitMessage">
+                
+                    <div id="locationDiv">
+                        <img src="./img/send-location.png" id="submitLocation">
+                    </div>
+                </form>
+            </div>
+            <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
+                <div class="d-flex flex-column" id="trelloSection">
+                    <h2 id="projectTitle">Food Locator</h2>
+                    <div id="trelloBoard"></div>
+                </div>
+                <div class="d-flex gap-4" id="memberOptionsRow">
+                    <div id="membersSection" class="d-flex flex-column">
+                        <h2>Members</h2>
+                        <hr>
+                        <div id="membersList" class="d-flex flex-column gap-2">
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Michael Klein</h4>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Romeo Dixon</h4>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Leah Nelson</h4>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Sam Prince</h4>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Morgan TA</h4>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="onlineDot"></div>
+                                <h4 class="memberName">Leah Nelson</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="memberManagement" class="text-center d-flex flex-column justify-content-around">
+                        <h3 class="memberInstruction">Don't see someone?</h3>
+                        <h3 id="inviteButton">Invite a member</h3>
+                        <h3 class="memberInstruction">Added by mistake?</h3>
+                        <h3 id="leaveButton">Leave Project</h3>
+                    </div>
+                    <div id="homeSection" class="text-center d-flex flex-column justify-content-around">
+                        <h3>Done for now?</h3>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
