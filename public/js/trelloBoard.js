@@ -1,7 +1,7 @@
 let list_items = document.querySelectorAll('.list-item');
 let lists = document.querySelectorAll('.list');
 const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children;
-let addTaskButton = document.querySelectorAll('.addTaskButton')
+let addTaskButton
 let container = document.querySelectorAll('#trelloBoard')[0]
 
 let listMoveSection = document.querySelectorAll('.moveList')
@@ -9,45 +9,45 @@ console.log(listMoveSection)
 
 let draggedItem = null;
 
-// console.log(addTaskButton)
-
-console.log(lists)
-
-const addList = (listName) => {
+const addList = () => {
     const newList = document.createElement('div');
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"> </div><h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>`
+
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"></div><h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
     newList.setAttribute('draggable', 'true');
     document.querySelector('#trelloBoard').appendChild(newList)
+    console.log(newList)
 
-    newList.style.display = 'block'
+    // newList.style.display = 'block'
     lists = document.querySelectorAll('.list')
     addTaskButton = document.querySelectorAll('.addTaskButton')
-    console.log(lists)
+
+    // addTask()
     makeDraggable()
     listDrag()
-
-
 }
 
 document.querySelector('#addListButton').addEventListener('click', addList)
 
 
-
-for (let k = 0; k < addTaskButton.length; k++) {
-    const taskButton = addTaskButton[k]
-    taskButton.addEventListener('click', function () {
-        const newTask = document.createElement('div');
-        newTask.innerHTML = 'Test'
-        newTask.classList.add('list-item')
-        newTask.setAttribute('draggable', 'true');
-        // console.log(taskButton.previousSibling.previousElementSibling)
-        taskButton.previousSibling.previousElementSibling.append(newTask)
-        list_items = document.querySelectorAll('.list-item')
-        // makeDraggable()
-    })
+function addTask() {
+    addTaskButton = document.querySelectorAll('.addTaskButton')
+    for (let k = 0; k < addTaskButton.length; k++) {
+        const taskButton = addTaskButton[k]
+        taskButton.addEventListener('click', function () {
+            const newTask = document.createElement('div');
+            newTask.innerHTML = 'Test'
+            newTask.classList.add('list-item')
+            newTask.setAttribute('draggable', 'true');
+            // console.log(taskButton.previousSibling.previousElementSibling)
+            taskButton.previousSibling.previousElementSibling.append(newTask)
+            list_items = document.querySelectorAll('.list-item')
+            makeDraggable()
+        })
+    }
 }
 
+addTask();
 
 function makeDraggable() {
 
@@ -93,7 +93,7 @@ function makeDraggable() {
 
 // makeDraggable()
 
-console.log(listMoveSection)
+// console.log(listMoveSection)
 
 
 function listDrag() {
@@ -110,6 +110,8 @@ function listDrag() {
         // })
     })
 }
+
+
 
 listDrag();
 container.addEventListener('dragover', e => {
@@ -139,3 +141,38 @@ function getDragAfterElement(container, x) {
 
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+// GET RID OF LATER!!!
+// console.log('click')
+// const newList = document.createElement('div');
+// const newListHeader = document.createElement('div');
+// const listTitle = document.createElement('h3');
+// const editListButton = document.createElement('img');
+// const taskList = document.createElement('div');
+// const addTskBtn = document.createElement('h3');
+
+// newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
+// newList.setAttribute('draggable', 'true');
+
+// newListHeader.classList.add('d-flex','justify-content-between', 'align-items-center', 'moveList');
+
+// listTitle.classList.add('text-white','listTitle');
+// listTitle.textContent = 'TEST';
+
+// editListButton.setAttribute('src','./img/pencil_icon.png');
+// editListButton.setAttribute('id','editListButton');
+
+// taskList.classList.add('taskList');
+
+// addTskBtn.classList.add('text-white','addTaskButton')
+// addTskBtn.textContent = '+ Add task'
+
+// newListHeader.appendChild(listTitle);
+// newListHeader.appendChild(editListButton);
+
+// newList.appendChild(newListHeader)
+// newList.appendChild(taskList)
+// newList.appendChild(addTskBtn)
+
+// trelloBoard[0].appendChild(newList)
+// addTaskButton = document.querySelectorAll('.addTaskButton')

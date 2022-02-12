@@ -53,3 +53,13 @@
 .dragging {
     opacity: .5;
 }
+
+.addTaskButton {
+    transition: .25s ease-in-out;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.addTaskButton:hover {
+    background-color: #5267bb;
+}

@@ -626,6 +626,11 @@ main {
     font-size: 24px;
 }
 
+#removeMemberButton:hover {
+    background-color: #810000;
+    cursor: pointer;
+}
+
 .modal-open {
     padding-right: 0 !important;
     overflow: auto !important;
