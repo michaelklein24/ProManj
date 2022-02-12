@@ -1,22 +1,24 @@
 let list_items = document.querySelectorAll('.list-item');
-const lists = document.querySelectorAll('.list');
+let lists = document.querySelectorAll('.list');
 const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children;
-const addTaskButton = document.querySelectorAll('.addTaskButton')
-
+let addTaskButton = document.querySelectorAll('.addTaskButton')
+let container = document.querySelectorAll('#trelloBoard')[0]
 
 let draggedItem = null;
 
-
-
+console.log(addTaskButton)
 
 const addList = (listName) => {
     const newList = document.createElement('div');
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"> </div><h3 class="text-white"><span class="bold">+</span> Add task</h3>`
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"> </div><h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
     newList.setAttribute('draggable', 'true');
     document.querySelector('#trelloBoard').appendChild(newList)
 
     newList.style.display = 'block'
+    lists = document.querySelectorAll('.list')
+    addTaskButton = document.querySelectorAll('.addTaskButton')
+    console.log(addTaskButton)
     makeDraggable()
 }
 
@@ -26,16 +28,18 @@ document.querySelector('#addListButton').addEventListener('click', addList)
 
 for (let k = 0; k < addTaskButton.length; k++) {
     const taskButton = addTaskButton[k]
-    taskButton.addEventListener('click', function() {
-            const newTask = document.createElement('div');
-            newTask.innerHTML = 'Test'
-            newTask.classList.add('list-item')
-            newTask.setAttribute('draggable','true');    
-            taskButton.previousSibling.previousElementSibling.append(newTask)
-            list_items = document.querySelectorAll('.list-item')
-            makeDraggable()
+    taskButton.addEventListener('click', function () {
+        const newTask = document.createElement('div');
+        newTask.innerHTML = 'Test'
+        newTask.classList.add('list-item')
+        newTask.setAttribute('draggable', 'true');
+        console.log(taskButton.previousSibling.previousElementSibling)
+        taskButton.previousSibling.previousElementSibling.append(newTask)
+        list_items = document.querySelectorAll('.list-item')
+        makeDraggable()
     })
 }
+
 
 function makeDraggable() {
 
@@ -78,4 +82,46 @@ function makeDraggable() {
         }
     }
 }
-makeDraggable()
+
+// makeDraggable()
+
+lists.forEach(list => {
+    list.addEventListener('dragstart', () => {
+        list.classList.add('dragging')
+    })
+
+    list.addEventListener('dragend', () => {
+        list.classList.remove('dragging')
+    })
+})
+
+
+console.log(container[0])
+container.addEventListener('dragover', e => {
+    e.preventDefault()
+    const afterElement = getDragAfterElement(container, e.clientX);
+    console.log(afterElement)
+    const list = document.querySelector('.dragging');
+    // container.appendChild(list)
+    if (afterElement == null) {
+        container.appendChild(list)
+    } else {
+        container.insertBefore(list, afterElement)
+    }
+})
+
+function getDragAfterElement(container, x) {
+const draggableElements = [...container.querySelectorAll('.list:not(.dragging)')]
+
+return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect()
+    const offset = x - box.right - box.width / 2
+    if(offset < 0 && offset > closest.offset)  {
+        return { offset: offset, element: child }
+    } else {
+        return closest
+    }
+    
+}, { offset: Number.NEGATIVE_INFINITY }).element
+
+}

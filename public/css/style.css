@@ -254,7 +254,7 @@ main {
     background-color: white;
     padding:18px;
     border-radius: 6px;
-    flex-basis: 50%;
+    /* flex-basis: 50%; */
     box-shadow: 0 0 100px -43px #001789b6;
     height: 100%;
 }
@@ -448,7 +448,9 @@ main {
     background-color: white;
     padding:18px;
     border-radius: 6px;
-    width:470px;
+    min-width: 380px;
+    /* max-width: 450px; */
+    width:50%;
     box-shadow: 0 0 100px -43px #001789b6;
     height: auto;
 }

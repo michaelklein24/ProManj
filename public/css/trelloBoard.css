@@ -1,25 +1,19 @@
 
 #trelloColumn {
     width: 100%;
+    flex:1 1 100%;
 }
 
 #trelloBoard {
-    display:flex;
-    flex:1;
-    width: 100%;
+    /* width: 500px; */
     overflow-x: scroll;
 }
 
 #trelloBoard .list {
-    /* display:flex; */
-    /* flex-flow: column; */
-    flex: 1;
     margin-bottom: auto;
-    width: 100%;
-    min-width: 250px;
-    max-width: 350px;
-    /* height: 100%; */
-    /* min-height: 200px; */
+    min-width:270px;
+    width:270px;
+
 
     background-color: #374785;
     border-radius: 6px;
@@ -45,4 +39,17 @@
 
 #editListButton {
     height: 20px;
+}
+
+.taskList {
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.taskList::-webkit-scrollbar {
+    display: none;
+}
+
+.dragging {
+    opacity: .5;
 }
