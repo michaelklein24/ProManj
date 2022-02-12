@@ -51,7 +51,7 @@ const createProjectHandler = async (e) => {
     if (projectName && projectDesc) {
         const response = await fetch('/api/projects', {
             method: 'POST',
-            body: JSON.stringify({ projectName, projectDesc }),
+            body: JSON.stringify({ projectName, projectDesc, }),
             headers: { 'Content-Type': 'application/json' },
         })
         const data = await response.json();

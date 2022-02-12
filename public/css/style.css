@@ -345,6 +345,8 @@ main {
 .projectItemCustom {
     padding: 10px;
     border-radius: 6px;
+    transition: .15s linear;
+
 }
 
 .projectItemCustom:hover {
