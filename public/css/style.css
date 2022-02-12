@@ -237,6 +237,7 @@ main {
     background-color: #24305E;
     border-radius: 360px;
     color:white;
+    cursor: pointer;
 }
 
 #bg-color-projects-dashboard {
@@ -464,6 +465,13 @@ main {
         height: 70%
 }
 
+#addListButton {
+    cursor: pointer;
+    background-color: #374785;
+    border-radius: 6px;
+    padding: 4px 6px
+} 
+
 #memberOptionsRow {
     height: 230px;
 }
@@ -510,7 +518,7 @@ main {
 }
 
 #inviteButton {
-    background-color: #374785;
+    background-color: #4557a1;
     border-radius: 6px;
     color:white;
     font-weight: bold;
@@ -518,13 +526,23 @@ main {
     padding:6px
 }
 
+#inviteButton:hover {
+    background-color: #374785;
+    cursor: pointer;
+}
+
 #leaveButton {
-    background-color: #B90000;
+    background-color: #dd0000;
     border-radius: 6px;
     color:white;
     font-weight: bold;
     font-size: 24px;
     padding:6px
+}
+
+#leaveButton:hover {
+    background-color: #B90000;
+    cursor: pointer;
 }
 
 .onlineDot {
@@ -533,6 +551,75 @@ main {
     padding: 5px;
     border: 1px solid;
     border-radius: 360px;
+}
+
+/* INVITE MEMBER MODAL */
+#inviteMemberButton {
+    border: none;
+    background-color: #4557a1;
+    border-radius: 6px;
+    color:white;
+    /* font-weight: bold; */
+    font-size: 24px;
+    padding:4px 10px;
+    /* width: 40%; */
+}
+
+#inviteMemberButton:hover {
+    background-color: #374785;
+    cursor: pointer;
+}
+
+#addMemberInput {
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: #C4C4C4;
+    color:white;
+    width:90%;
+}
+
+#addMemberInput::placeholder {
+    color:white;
+}
+
+#profileOptions {
+    position:absolute;
+    background-color: white;
+    right:1vw;
+    border-radius: 6px;
+}
+
+.hideDisplay {
+    display: none !important;
+}
+
+#profileOptions h3 {
+    font-size: 24px;
+    cursor: pointer;
+    color:white;
+    border-radius: 6px;
+    padding: 5px 10px;
+}
+
+#editProfileButton {
+    background-color: #4356FF;
+}
+#editProfileButton:hover {
+    background-color: #313fbe;
+}
+#logoutButton {
+    background-color: #FF2222;
+}
+#logoutButton:hover {
+    background-color: #b81919;
+}
+
+#removeMemberButton {
+    background-color: #dd0000;
+    border-radius: 6px;
+    padding:6px 10px;
+    font-size: 24px;
 }
 
 @media screen and (max-width:1200px) {

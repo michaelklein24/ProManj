@@ -4,9 +4,14 @@ const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children;
 let addTaskButton = document.querySelectorAll('.addTaskButton')
 let container = document.querySelectorAll('#trelloBoard')[0]
 
+let listMoveSection = document.querySelectorAll('.moveList')
+console.log(listMoveSection)
+
 let draggedItem = null;
 
-console.log(addTaskButton)
+// console.log(addTaskButton)
+
+console.log(lists)
 
 const addList = (listName) => {
     const newList = document.createElement('div');
@@ -18,8 +23,11 @@ const addList = (listName) => {
     newList.style.display = 'block'
     lists = document.querySelectorAll('.list')
     addTaskButton = document.querySelectorAll('.addTaskButton')
-    console.log(addTaskButton)
+    console.log(lists)
     makeDraggable()
+    listDrag()
+
+
 }
 
 document.querySelector('#addListButton').addEventListener('click', addList)
@@ -33,10 +41,10 @@ for (let k = 0; k < addTaskButton.length; k++) {
         newTask.innerHTML = 'Test'
         newTask.classList.add('list-item')
         newTask.setAttribute('draggable', 'true');
-        console.log(taskButton.previousSibling.previousElementSibling)
+        // console.log(taskButton.previousSibling.previousElementSibling)
         taskButton.previousSibling.previousElementSibling.append(newTask)
         list_items = document.querySelectorAll('.list-item')
-        makeDraggable()
+        // makeDraggable()
     })
 }
 
@@ -85,22 +93,29 @@ function makeDraggable() {
 
 // makeDraggable()
 
-lists.forEach(list => {
-    list.addEventListener('dragstart', () => {
-        list.classList.add('dragging')
+console.log(listMoveSection)
+
+
+function listDrag() {
+    lists.forEach(list => {
+        list.addEventListener('dragstart', () => {
+            list.classList.add('dragging')
+        })
+
+        list.addEventListener('dragend', () => {
+            list.classList.remove('dragging')
+        })
+        // list.addEventListener('drop', ()=> {
+        //     list.classList.remove('dragging')
+        // })
     })
+}
 
-    list.addEventListener('dragend', () => {
-        list.classList.remove('dragging')
-    })
-})
-
-
-console.log(container[0])
+listDrag();
 container.addEventListener('dragover', e => {
     e.preventDefault()
     const afterElement = getDragAfterElement(container, e.clientX);
-    console.log(afterElement)
+    // console.log(afterElement)
     const list = document.querySelector('.dragging');
     // container.appendChild(list)
     if (afterElement == null) {
@@ -110,18 +125,17 @@ container.addEventListener('dragover', e => {
     }
 })
 
+
 function getDragAfterElement(container, x) {
-const draggableElements = [...container.querySelectorAll('.list:not(.dragging)')]
+    const draggableElements = [...container.querySelectorAll('.list:not(.dragging)')]
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect()
+        const offset = x - box.left - box.width / 2
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child }
+        } else {
+            return closest
+        }
 
-return draggableElements.reduce((closest, child) => {
-    const box = child.getBoundingClientRect()
-    const offset = x - box.right - box.width / 2
-    if(offset < 0 && offset > closest.offset)  {
-        return { offset: offset, element: child }
-    } else {
-        return closest
-    }
-    
-}, { offset: Number.NEGATIVE_INFINITY }).element
-
+    }, { offset: Number.NEGATIVE_INFINITY }).element
 }
