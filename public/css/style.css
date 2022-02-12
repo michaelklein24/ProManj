@@ -255,7 +255,7 @@ main {
     background-color: white;
     padding:18px;
     border-radius: 6px;
-    /* flex-basis: 50%; */
+    flex-basis: 50%;
     box-shadow: 0 0 100px -43px #001789b6;
     height: 100%;
 }
