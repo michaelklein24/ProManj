@@ -1,0 +1,48 @@
+
+#trelloColumn {
+    width: 100%;
+}
+
+#trelloBoard {
+    display:flex;
+    flex:1;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+#trelloBoard .list {
+    /* display:flex; */
+    /* flex-flow: column; */
+    flex: 1;
+    margin-bottom: auto;
+    width: 100%;
+    min-width: 250px;
+    max-width: 350px;
+    /* height: 100%; */
+    /* min-height: 200px; */
+
+    background-color: #374785;
+    border-radius: 6px;
+    
+    padding:10px;
+    transition: all 0.2s linear;
+
+    cursor: pointer;
+}
+
+.list-item {
+    background-color: #ECECEC;
+    border-radius: 6px;
+    padding: 10px;
+    margin:4px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.list-item:hover {
+    background-color: #ecececcc;
+}
+
+#editListButton {
+    height: 20px;
+}

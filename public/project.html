@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/trelloBoard.css">
     <title>Document</title>
 </head>
+
 <body>
     <header class="d-flex justify-content-between container-fluid">
         <div class="d-flex gap-3 align-items-center">
+            <img src="./img/back-icon.png" id="homeIcon">
             <div id="project-logo"></div>
             <h1 id="projectName">ProManj</h1>
         </div>
@@ -28,10 +32,10 @@
         <div class="d-flex gap-4" id="bg-color-projects-dashboard">
             <div id="messagesColumn1" class="d-flex flex-column gap-3">
                 <!-- <div class="d-flex justify-content-between"> -->
-                    <h2 id="messengerWord">Chat Channel</h2>
+                <h2 id="messengerWord">Chat Channel</h2>
                 <!-- </div> -->
                 <div class="d-flex flex-column gap-3" id="messagesList">
-                    
+
                     <div class="d-flex flex-column">
                         <!-- <div class="d-flex gap-3 align-items-center messageListing collapsible">
                             <div class="profileCircle">RD</div>
@@ -45,16 +49,56 @@
                 <form class="sendMessage d-flex justify-content-between gap-3">
                     <input type="text" placeholder="type message here" class="messageInput">
                     <input type="submit" value="send" class="submitMessage">
-                
+
                     <div id="locationDiv">
                         <img src="./img/send-location.png" id="submitLocation">
                     </div>
                 </form>
             </div>
             <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
-                <div class="d-flex flex-column" id="trelloSection">
+                <div class="d-flex flex-column gap-3" id="trelloSection">
+                    <div class="d-flex justify-content-between">
                     <h2 id="projectTitle">Food Locator</h2>
-                    <div id="trelloBoard"></div>
+                    <h3 id="addListButton">add List</h3>
+                    </div>
+                    <div id="trelloBoard" class="flex gap-3">
+
+
+                        <div class="list d-flex flex-column gap-2" draggable="true">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="text-white listTitle">To Do</h3>
+                                <img src="./img/pencil_icon.png" id="editListButton">
+                            </div>
+                            <div class="taskList">
+                                <div class="list-item" draggable="true">Add a README.md file</div>
+                                <div class="list-item" draggable="true">List item 2</div>
+                                <div class="list-item" draggable="true">List item 3</div>
+                            </div>
+                            <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
+                        </div>
+                        <div class="list d-flex flex-column gap-2" draggable="true">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="text-white listTitle">Doing</h3>
+                                <img src="./img/pencil_icon.png" id="editListButton">
+                            </div>
+                            <div class="taskList">
+                            </div>
+                            <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
                 </div>
                 <div class="d-flex gap-4" id="memberOptionsRow">
                     <div id="membersSection" class="d-flex flex-column">
@@ -93,12 +137,10 @@
                         <h3 class="memberInstruction">Added by mistake?</h3>
                         <h3 id="leaveButton">Leave Project</h3>
                     </div>
-                    <div id="homeSection" class="text-center d-flex flex-column justify-content-around">
-                        <h3>Done for now?</h3>
-                    </div>
                 </div>
             </div>
 </body>
 <script src="./js/collapsible.js"></script>
+<script src="./js/trelloBoard.js"></script>
 
 </html>
