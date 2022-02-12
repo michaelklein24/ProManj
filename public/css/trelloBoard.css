@@ -1,0 +1,65 @@
+
+#trelloColumn {
+    width: 100%;
+    flex:1 1 100%;
+}
+
+#trelloBoard {
+    /* width: 500px; */
+    overflow-x: scroll;
+}
+
+#trelloBoard .list {
+    margin-bottom: auto;
+    min-width:270px;
+    width:270px;
+
+
+    background-color: #374785;
+    border-radius: 6px;
+    
+    padding:10px;
+    transition: all 0.2s linear;
+
+    cursor: pointer;
+}
+
+.list-item {
+    background-color: #ECECEC;
+    border-radius: 6px;
+    padding: 10px;
+    margin:4px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.list-item:hover {
+    background-color: #ecececcc;
+}
+
+#editListButton {
+    height: 20px;
+}
+
+.taskList {
+    overflow-y: scroll;
+    max-height: 350px;
+}
+
+.taskList::-webkit-scrollbar {
+    display: none;
+}
+
+.dragging {
+    opacity: .5;
+}
+
+.addTaskButton {
+    transition: .25s ease-in-out;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.addTaskButton:hover {
+    background-color: #5267bb;
+}
