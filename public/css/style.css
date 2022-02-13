@@ -274,6 +274,10 @@ main {
     overflow-y: scroll;
     height: 100%;
 }
+#messagesList::-webkit-scrollbar {
+    display: none;
+}
+
 
 #addMessageIcon {
     height:31px;
@@ -298,17 +302,30 @@ main {
     color:white;
 }
 
-.messageCollapsible {
+#deleteNoteButton {
+    height:20px;
+}
+
+.noteContent {
     display:none;
-    border-radius: 6px;
-    height:50vh;
+    border-radius:0 0 6px 6px;
     padding:8px;
-    background-color: #C4C4C4;
+    background-image: url('/img/notepad.png');
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.noteContent h3 {
+    font-size: 20px;
+    padding: 18px 35px;
+    line-height:1.25;
 }
 
 .messageListing {
+    background-color: #593b3b75;
     padding:10px;
-    border-radius: 6px;
+    border-radius: 6px 6px 0 0;
 }
 
 .messageContact {
@@ -318,14 +335,17 @@ main {
 
 .messageListing:hover {
     cursor: pointer;
-    background-color: #C4C4C4;
 }
-
+/* 
 .messagesContainer {
-    height: 90%;
-    overflow-y: scroll;
     
-}
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    
+} */
 
 .messageInput {
     width: 80%;
