@@ -1,11 +1,53 @@
 let list_items = document.querySelectorAll('.list-item');
 let lists = document.querySelectorAll('.list');
 const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children;
-let addTaskButton
+let addTaskButton = document.querySelectorAll('.addTaskButton')
 let container = document.querySelectorAll('#trelloBoard')[0]
 
-let listMoveSection = document.querySelectorAll('.moveList')
-console.log(listMoveSection)
+const movableTaskText = document.querySelector('#moveableTasksH6');
+const movableListText = document.querySelector('#moveableListsH6');
+
+// toggle.checked == true
+// enable List movement and disable item movement
+// toggle.checked == false
+const toggle = document.querySelector('#draggableToggle');
+
+toggle.addEventListener('click', () => {
+    if (toggle.checked == true) {
+
+        movableTaskText.style.opacity = '50%';
+        movableListText.style.opacity = '100%';
+
+        lists = document.querySelectorAll('.list');
+        // Columns are draggable
+        lists.forEach(list => {
+            list.setAttribute('draggable', 'true');
+        });
+        // List_items are NOT draggable
+        list_items.forEach(list_item => {
+            list_item.setAttribute('draggable', 'false');
+        })
+
+        container.addEventListener('dragover', dropList)
+        listDrag()
+    } else if (toggle.checked == false) {
+
+        movableTaskText.style.opacity = '100%';
+        movableListText.style.opacity = '50%';
+
+        // Columns are NOT draggable
+        lists.forEach(list => {
+            list.setAttribute('draggable', 'false')
+        })
+        // List_items are draggable
+        list_items.forEach(list_item => {
+            list_item.setAttribute('draggable', 'true');
+        })
+
+        container.removeEventListener('dragover', dropList)
+
+    }
+})
 
 let draggedItem = null;
 
@@ -14,24 +56,40 @@ const addList = () => {
 
     newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"></div><h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
-    newList.setAttribute('draggable', 'true');
+
+    if (toggle.checked == true) {
+        newList.setAttribute('draggable', 'true');
+    } else {
+        newList.setAttribute('draggable', 'false');
+    }
+
     document.querySelector('#trelloBoard').appendChild(newList)
-    console.log(newList)
 
-    // newList.style.display = 'block'
-    lists = document.querySelectorAll('.list')
-    addTaskButton = document.querySelectorAll('.addTaskButton')
-
-    // addTask()
-    makeDraggable()
-    listDrag()
+    // Allows for event listeners to target these elements since they were a part of the original DOM
+    lists = document.querySelectorAll('.list');
+    addTaskButton = document.querySelectorAll('.addTaskButton');
+    addTaskButton[addTaskButton.length - 1].addEventListener('click', () => {
+        const newTask = document.createElement('div');
+        newTask.innerHTML = 'Test'
+        newTask.classList.add('list-item')
+        newTask.setAttribute('draggable', 'true');
+        addTaskButton[addTaskButton.length - 1].previousElementSibling.append(newTask)
+        list_items = document.querySelectorAll('.list-item')
+        console.log(list_items)
+        if (toggle.checked == false) {
+            makeDraggable()
+        }
+    })
+    if (toggle.checked == true) {
+        listDrag();
+    }
 }
 
-document.querySelector('#addListButton').addEventListener('click', addList)
-
+// addTaskButton.addEventListener('click', addTask)
+addTask()
 
 function addTask() {
-    addTaskButton = document.querySelectorAll('.addTaskButton')
+    console.log('click')
     for (let k = 0; k < addTaskButton.length; k++) {
         const taskButton = addTaskButton[k]
         taskButton.addEventListener('click', function () {
@@ -39,23 +97,24 @@ function addTask() {
             newTask.innerHTML = 'Test'
             newTask.classList.add('list-item')
             newTask.setAttribute('draggable', 'true');
-            // console.log(taskButton.previousSibling.previousElementSibling)
-            taskButton.previousSibling.previousElementSibling.append(newTask)
+            taskButton.previousElementSibling.append(newTask)
             list_items = document.querySelectorAll('.list-item')
-            makeDraggable()
+            console.log(list_items)
+            if (toggle.checked == false) {
+                makeDraggable()
+            }
         })
     }
 }
 
-addTask();
-
 function makeDraggable() {
-
     for (let i = 0; i < list_items.length; i++) {
         const item = list_items[i];
 
         item.addEventListener('dragstart', function (e) {
             draggedItem = item;
+            lists = document.querySelectorAll('.list');
+
             setTimeout(function () {
                 draggedItem.style.display = 'none'
             }, 0)
@@ -77,44 +136,42 @@ function makeDraggable() {
 
             list.addEventListener('dragenter', function (e) {
                 e.preventDefault()
-                this.style.backgroundColor = '#37478586'
+                // this.style.backgroundColor = '#37478586'
             })
 
             list.addEventListener('dragleave', function (e) {
-                this.style.backgroundColor = '#374790'
+                // this.style.backgroundColor = '#374790'
             })
             list.addEventListener('drop', function (e) {
                 this.children[1].appendChild(draggedItem);
-                this.style.backgroundColor = '#374790'
+                // this.style.backgroundColor = '#374790'
             })
         }
     }
 }
 
-// makeDraggable()
-
-// console.log(listMoveSection)
-
-
 function listDrag() {
     lists.forEach(list => {
         list.addEventListener('dragstart', () => {
             list.classList.add('dragging')
-        })
-
+        });
         list.addEventListener('dragend', () => {
             list.classList.remove('dragging')
-        })
-        // list.addEventListener('drop', ()=> {
-        //     list.classList.remove('dragging')
-        // })
+        });
+    });
+
+    lists.forEach(list => {
+        list.addEventListener('dragstart', () => {
+            list.classList.add('dragging')
+        });
+        list.addEventListener('dragend', () => {
+            list.classList.remove('dragging')
+        });
     })
+
 }
 
-
-
-listDrag();
-container.addEventListener('dragover', e => {
+function dropList(e) {
     e.preventDefault()
     const afterElement = getDragAfterElement(container, e.clientX);
     // console.log(afterElement)
@@ -125,8 +182,7 @@ container.addEventListener('dragover', e => {
     } else {
         container.insertBefore(list, afterElement)
     }
-})
-
+}
 
 function getDragAfterElement(container, x) {
     const draggableElements = [...container.querySelectorAll('.list:not(.dragging)')]
@@ -141,6 +197,31 @@ function getDragAfterElement(container, x) {
 
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
+
+listDrag();
+makeDraggable();
+document.querySelector('#addListButton').addEventListener('click', addList)
+
+const editTextOn = document.querySelector('#editTextOn');
+const editTextOff = document.querySelector('#editTextOff');
+const textToggle = document.querySelector('#editTextToggle'); 
+
+textToggle.addEventListener('click', () => {
+    if(textToggle.checked == true) {
+        editTextOn.style.opacity = '50%';
+        editTextOff.style.opacity = '100%';
+    } else {
+        editTextOn.style.opacity = '100%';
+        editTextOff.style.opacity = '50%';
+    }
+    
+})
+
+
+
+
+
+
 
 // GET RID OF LATER!!!
 // console.log('click')

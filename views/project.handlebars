@@ -38,33 +38,62 @@
         </div>
         <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
             <div class="d-flex flex-column gap-3" id="trelloSection">
-                <div class="d-flex justify-content-between">
+                <div id='trelloTitleBar'class="d-flex justify-content-between align-items-center">
                     <h2 id="projectTitle">Food Locator</h2>
-                    <h3 id="addListButton" class="text-white align-self-center">add List</h3>
+
+                    <div class="d-flex gap-3 align-items-center" id="trelloOptionsBar">
+                        {{!-- <h6 id=doubleClickInstructons class="bold text-end">double click text<br> to edit</h6>
+                        --}}
+                        <div class="d-flex gap-2 align-items-center" id="dragTaskToggleDiv">
+                            <div class="d-flex flex-column">
+                                <label id="moveableTasksH6" for="draggableToggle">moveable tasks</label>
+                                <label id="moveableListsH6" for="draggableToggle">moveable lists</label>
+                            </div>
+                            <input type="checkbox" id="draggableToggle">
+                        </div>
+                        
+                        <div class="vr"></div>
+                        <div class="d-flex gap-2 align-items-center" id="editTextToggleDiv">
+                            <input type="checkbox" id="editTextToggle">
+                            <div class="d-flex flex-column">
+                                <label id="editTextOn" for="editTextToggle">edit text ON</label>
+                                <label id="editTextOff" for="editTextToggle">edit text OFF</label>
+                            </div>
+                        </div>
+
+                        <div class="vr"></div>
+                        <div id="addListButton" class="d-flex gap-2">
+                            <img class="text-white align-self-center" src="img/plus.png" height="20px" width='auto'>
+                            <h6 class="bold">add new list</label>
+                        </div>
+                    </div>
+
+
+
                 </div>
                 <div id="trelloBoard" class="d-flex gap-3">
 
 
-                    <div class="list d-flex flex-column gap-2" draggable="true">
+                    <div class="list d-flex flex-column gap-2">
                         <div class="d-flex justify-content-between align-items-center moveList">
                             <h3 class="text-white listTitle">To Do</h3>
                             <img src="./img/pencil_icon.png" id="editListButton">
                         </div>
                         <div class="taskList">
-                            <div class="list-item" draggable="true">Add a README.md file</div>
-                            <div class="list-item" draggable="true">List item 2</div>
-                            <div class="list-item" draggable="true">List item 3</div>
+                            <div class="list-item" draggable="true" contenteditable="true">Add a README.md file</div>
+                            <div class="list-item" draggable="true" contenteditable="true">List item 2</div>
+                            <div class="list-item" draggable="true" contenteditable="true">List item 3</div>
                         </div>
-                        <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
+                        <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
                     </div>
-                    <div class="list d-flex flex-column gap-2" draggable="true">
+                    <div class="list d-flex flex-column gap-2">
                         <div class="d-flex justify-content-between align-items-center moveList">
                             <h3 class="text-white listTitle">Doing</h3>
                             <img src="./img/pencil_icon.png" id="editListButton">
                         </div>
                         <div class="taskList">
                         </div>
-                        <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
+                        <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
                     </div>
 
 
@@ -184,8 +213,8 @@
         <script src="./js/profileOptions.js"></script>
         <script src="./js/updateProject.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
