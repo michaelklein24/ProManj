@@ -63,6 +63,12 @@ const addList = () => {
         newList.setAttribute('draggable', 'false');
     }
 
+    if(textToggle.checked == true) {
+        newList.children[0].children[0].setAttribute('contenteditable','false')
+    } else {
+        newList.children[0].children[0].setAttribute('contenteditable', 'true')
+    }
+
     document.querySelector('#trelloBoard').appendChild(newList)
 
     // Allows for event listeners to target these elements since they were a part of the original DOM
@@ -73,6 +79,7 @@ const addList = () => {
         newTask.innerHTML = 'Test'
         newTask.classList.add('list-item')
         newTask.setAttribute('draggable', 'true');
+        console.log(newTask)
         addTaskButton[addTaskButton.length - 1].previousElementSibling.append(newTask)
         list_items = document.querySelectorAll('.list-item')
         console.log(list_items)
@@ -212,14 +219,17 @@ const editTextOff = document.querySelector('#editTextOff');
 const textToggle = document.querySelector('#editTextToggle'); 
 
 textToggle.addEventListener('click', () => {
+    console.log(lists)
     list_items = document.querySelectorAll('.list-item');
-    console.log(list_items)
+    lists = document.querySelectorAll('.list');
     if(textToggle.checked == true) {
         list_items.forEach(item => item.setAttribute('contenteditable', 'false'))
+        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable','false'))
         editTextOn.style.opacity = '50%';
         editTextOff.style.opacity = '100%';
     } else {
         list_items.forEach(item => item.setAttribute('contenteditable', 'true'))
+        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable','true'))
         editTextOn.style.opacity = '100%';
         editTextOff.style.opacity = '50%';
     }
