@@ -54,7 +54,7 @@ let draggedItem = null;
 const addList = () => {
     const newList = document.createElement('div');
 
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">test</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"></div><h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>`
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
 
     if (toggle.checked == true) {
@@ -72,28 +72,34 @@ const addList = () => {
     document.querySelector('#trelloBoard').appendChild(newList)
 
     // Allows for event listeners to target these elements since they were a part of the original DOM
-    lists = document.querySelectorAll('.list');
+    // lists = document.querySelectorAll('.list');
+    // addTaskButton = document.querySelectorAll('.addTaskButton');
+    // addTaskButton[addTaskButton.length - 1].addEventListener('click', () => {
+    //     const newTask = document.createElement('div');
+    //     newTask.innerHTML = 'Click to edit'
+    //     newTask.classList.add('list-item')
+    //     newTask.setAttribute('draggable', 'true');
+    //     console.log(newTask)
+    //     addTaskButton[addTaskButton.length - 1].previousElementSibling.append(newTask)
     addTaskButton = document.querySelectorAll('.addTaskButton');
-    addTaskButton[addTaskButton.length - 1].addEventListener('click', () => {
-        const newTask = document.createElement('div');
-        newTask.innerHTML = 'Test'
-        newTask.classList.add('list-item')
-        newTask.setAttribute('draggable', 'true');
-        console.log(newTask)
-        addTaskButton[addTaskButton.length - 1].previousElementSibling.append(newTask)
+    console.log(addTaskButton)
+    for(let m = 0; m < addTaskButton.length; m++) {
+        addTaskButton[m].removeEventListener('click', addTask)
+
+        addTaskButton[m].addEventListener('click', addTask)
+
+    }
+
         list_items = document.querySelectorAll('.list-item')
-        console.log(list_items)
         if (toggle.checked == false) {
             makeDraggable()
         }
-    })
+    // })
     if (toggle.checked == true) {
         listDrag();
     }
 }
 
-// addTaskButton.addEventListener('click', addTask)
-addTask()
 
 function addTask() {
     console.log('click')
