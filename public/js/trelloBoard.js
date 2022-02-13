@@ -45,7 +45,7 @@ toggle.addEventListener('click', () => {
         })
 
         container.removeEventListener('dragover', dropList)
-
+        makeDraggable()
     }
 })
 
@@ -63,37 +63,26 @@ const addList = () => {
         newList.setAttribute('draggable', 'false');
     }
 
-    if(textToggle.checked == true) {
-        newList.children[0].children[0].setAttribute('contenteditable','false')
+    if (textToggle.checked == true) {
+        newList.children[0].children[0].setAttribute('contenteditable', 'false')
     } else {
         newList.children[0].children[0].setAttribute('contenteditable', 'true')
     }
 
     document.querySelector('#trelloBoard').appendChild(newList)
-
-    // Allows for event listeners to target these elements since they were a part of the original DOM
-    // lists = document.querySelectorAll('.list');
-    // addTaskButton = document.querySelectorAll('.addTaskButton');
-    // addTaskButton[addTaskButton.length - 1].addEventListener('click', () => {
-    //     const newTask = document.createElement('div');
-    //     newTask.innerHTML = 'Click to edit'
-    //     newTask.classList.add('list-item')
-    //     newTask.setAttribute('draggable', 'true');
-    //     console.log(newTask)
-    //     addTaskButton[addTaskButton.length - 1].previousElementSibling.append(newTask)
+    // let lists = document.querySelectorAll('.list');
+    console.log(list_items)
     addTaskButton = document.querySelectorAll('.addTaskButton');
-    console.log(addTaskButton)
-    for(let m = 0; m < addTaskButton.length; m++) {
-        addTaskButton[m].removeEventListener('click', addTask)
+  
 
-        addTaskButton[m].addEventListener('click', addTask)
+    addTaskButton[addTaskButton.length - 1].addEventListener('click', appendTask)
 
+
+    //NEEDED FOR TOGGLING LIST ITEM DRAG -- DONT DELETE
+    list_items = document.querySelectorAll('.list-item')
+    if (toggle.checked == false) {
+        makeDraggable()
     }
-
-        list_items = document.querySelectorAll('.list-item')
-        if (toggle.checked == false) {
-            makeDraggable()
-        }
     // })
     if (toggle.checked == true) {
         listDrag();
@@ -103,27 +92,51 @@ const addList = () => {
 
 function addTask() {
     console.log('click')
-    for (let k = 0; k < addTaskButton.length; k++) {
-        const taskButton = addTaskButton[k]
+    // for (let k = 0; k < addTaskButton.length; k++) {
+        const taskButton = addTaskButton[list_items.length - 1]
+        console.log(taskButton)
         taskButton.addEventListener('click', function () {
             const newTask = document.createElement('div');
-            newTask.innerHTML = 'Test'
+            newTask.innerHTML = 'Click to enter text'
             newTask.classList.add('list-item')
             newTask.setAttribute('draggable', 'true');
             if (textToggle.checked == true) {
-            newTask.setAttribute('contenteditable', 'false');
+                newTask.setAttribute('contenteditable', 'false');
             } else {
-            newTask.setAttribute('contenteditable', 'true');
+                newTask.setAttribute('contenteditable', 'true');
             }
             taskButton.previousElementSibling.append(newTask);
             list_items = document.querySelectorAll('.list-item');
             console.log(list_items);
             if (toggle.checked == false) {
-                makeDraggable();
+                console.log('box is unchecked')
+                // makeDraggable();
             };
         });
-    };
+    // };
 };
+
+const textToggle = document.querySelector('#editTextToggle');
+
+
+function appendTask() {
+    for(let z=0; z<addTaskButton.length; z++) {
+        const newTask = document.createElement('div');
+        newTask.innerHTML = 'Click to enter text'
+        newTask.classList.add('list-item')
+        newTask.setAttribute('draggable', 'true');
+        if (textToggle.checked == true) {
+            newTask.setAttribute('contenteditable', 'false');
+        } else {
+            newTask.setAttribute('contenteditable', 'true');
+        }
+        console.log(this)
+        this.previousElementSibling.append(newTask);
+    }
+}
+
+
+
 
 function makeDraggable() {
     for (let i = 0; i < list_items.length; i++) {
@@ -222,22 +235,22 @@ document.querySelector('#addListButton').addEventListener('click', addList)
 
 const editTextOn = document.querySelector('#editTextOn');
 const editTextOff = document.querySelector('#editTextOff');
-const textToggle = document.querySelector('#editTextToggle'); 
+// const textToggle = document.querySelector('#editTextToggle');
 
 textToggle.addEventListener('click', () => {
     console.log(lists)
     list_items = document.querySelectorAll('.list-item');
     lists = document.querySelectorAll('.list');
-    if(textToggle.checked == true) {
+    if (textToggle.checked == true) {
         list_items.forEach(item => item.setAttribute('contenteditable', 'false'))
-        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable','false'))
+        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable', 'false'))
         editTextOn.style.opacity = '50%';
         editTextOff.style.opacity = '100%';
     } else {
         list_items.forEach(item => item.setAttribute('contenteditable', 'true'))
-        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable','true'))
+        lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable', 'true'))
         editTextOn.style.opacity = '100%';
         editTextOff.style.opacity = '50%';
     }
-    
+
 }) 
