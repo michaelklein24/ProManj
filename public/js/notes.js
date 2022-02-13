@@ -44,7 +44,7 @@ function appendNote() {
             deleteNoteBtn.parentNode.parentNode.remove()
         }
     })
-    
+
     noteContainer.appendChild(divEl)
 
 }
@@ -74,7 +74,7 @@ for (let i = 0; i < collapsible.length; i++) {
     })
 }
 
-for (i = 0; i < collapsible.length; i++) {
+for (let i = 0; i < collapsible.length; i++) {
     collapsible[i].addEventListener("click", function (e) {
         if (e.target.classList.value.includes('messageListing')) {
             this.classList.toggle("active");
@@ -86,4 +86,13 @@ for (i = 0; i < collapsible.length; i++) {
             }
         }
     });
+}
+
+for (let i = 0; i < collapsible.length; i++) {
+    collapsible[i].addEventListener('click', (e) => {
+        if (e.target.getAttribute('id') == 'deleteNoteButton') {
+            let deleteNoteBtn = e.target;
+            deleteNoteBtn.parentNode.parentNode.remove()
+        }
+    })
 }
