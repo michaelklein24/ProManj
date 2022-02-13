@@ -307,7 +307,8 @@ main {
 }
 
 .noteContent {
-    display:none;
+    display:block;
+    line-break: auto;
     border-radius:0 0 6px 6px;
     padding:8px;
     background-image: url('/img/notepad.png');
@@ -331,6 +332,7 @@ main {
 .messageContact {
     font-size: 20px;
     font-weight: bold;
+    max-width: 20vw;
 }
 
 .messageListing:hover {
