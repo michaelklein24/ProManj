@@ -314,7 +314,7 @@ main {
     background-image: url('/img/notepad.png');
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    transition: max-height .3s ease-out;
 }
 
 .noteContent h3 {
@@ -323,10 +323,20 @@ main {
     line-height:1.25;
 }
 
+.noteContent {
+    max-width: 32.85vw;
+    overflow-y: scroll;
+}
+
+.noteContent::-webkit-scrollbar {
+    display: none;
+}
+
 .messageListing {
     background-color: #593b3b75;
     padding:10px;
     border-radius: 6px 6px 0 0;
+    user-select: none;
 }
 
 .messageContact {

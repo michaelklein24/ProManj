@@ -37,10 +37,16 @@ function appendNote() {
         }
     })
 
+    //ADDS DELETE NOTE EVENT LISTENER 
+    divEl.addEventListener('click', (e) => {
+        if (e.target.getAttribute('id') == 'deleteNoteButton') {
+            let deleteNoteBtn = e.target;
+            deleteNoteBtn.parentNode.parentNode.remove()
+        }
+    })
+    
     noteContainer.appendChild(divEl)
 
-    const deleteNoteButton = document.querySelector('#deleteNoteButton')
-    console.log(deleteNoteButton)
 }
 
 
