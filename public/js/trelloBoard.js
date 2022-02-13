@@ -97,15 +97,20 @@ function addTask() {
             newTask.innerHTML = 'Test'
             newTask.classList.add('list-item')
             newTask.setAttribute('draggable', 'true');
-            taskButton.previousElementSibling.append(newTask)
-            list_items = document.querySelectorAll('.list-item')
-            console.log(list_items)
-            if (toggle.checked == false) {
-                makeDraggable()
+            if (textToggle.checked == true) {
+            newTask.setAttribute('contenteditable', 'false');
+            } else {
+            newTask.setAttribute('contenteditable', 'true');
             }
-        })
-    }
-}
+            taskButton.previousElementSibling.append(newTask);
+            list_items = document.querySelectorAll('.list-item');
+            console.log(list_items);
+            if (toggle.checked == false) {
+                makeDraggable();
+            };
+        });
+    };
+};
 
 function makeDraggable() {
     for (let i = 0; i < list_items.length; i++) {
@@ -207,53 +212,16 @@ const editTextOff = document.querySelector('#editTextOff');
 const textToggle = document.querySelector('#editTextToggle'); 
 
 textToggle.addEventListener('click', () => {
+    list_items = document.querySelectorAll('.list-item');
+    console.log(list_items)
     if(textToggle.checked == true) {
+        list_items.forEach(item => item.setAttribute('contenteditable', 'false'))
         editTextOn.style.opacity = '50%';
         editTextOff.style.opacity = '100%';
     } else {
+        list_items.forEach(item => item.setAttribute('contenteditable', 'true'))
         editTextOn.style.opacity = '100%';
         editTextOff.style.opacity = '50%';
     }
     
-})
-
-
-
-
-
-
-
-// GET RID OF LATER!!!
-// console.log('click')
-// const newList = document.createElement('div');
-// const newListHeader = document.createElement('div');
-// const listTitle = document.createElement('h3');
-// const editListButton = document.createElement('img');
-// const taskList = document.createElement('div');
-// const addTskBtn = document.createElement('h3');
-
-// newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
-// newList.setAttribute('draggable', 'true');
-
-// newListHeader.classList.add('d-flex','justify-content-between', 'align-items-center', 'moveList');
-
-// listTitle.classList.add('text-white','listTitle');
-// listTitle.textContent = 'TEST';
-
-// editListButton.setAttribute('src','./img/pencil_icon.png');
-// editListButton.setAttribute('id','editListButton');
-
-// taskList.classList.add('taskList');
-
-// addTskBtn.classList.add('text-white','addTaskButton')
-// addTskBtn.textContent = '+ Add task'
-
-// newListHeader.appendChild(listTitle);
-// newListHeader.appendChild(editListButton);
-
-// newList.appendChild(newListHeader)
-// newList.appendChild(taskList)
-// newList.appendChild(addTskBtn)
-
-// trelloBoard[0].appendChild(newList)
-// addTaskButton = document.querySelectorAll('.addTaskButton')
+}) 
