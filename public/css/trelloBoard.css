@@ -37,7 +37,7 @@
     background-color: #ecececcc;
 }
 
-#editListButton {
+#deleteListButton {
     height: 20px;
 }
 
@@ -50,9 +50,9 @@
     display: none;
 }
 
-/* .dragging {
+.dragging {
     opacity: .5;
-} */
+}
 
 .addTaskButton {
     transition: .25s ease-in-out;

@@ -2,12 +2,15 @@ let list_items = document.querySelectorAll('.list-item'); //targets all tasks it
 let lists = document.querySelectorAll('.list'); //targets all column lists on page load
 const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children; //targets trello board container that lists are in
 let addTaskButton = document.querySelectorAll('.addTaskButton') //targets all tasks buttons on page load
+let deleteListButton = document.querySelectorAll('#deleteListButton');
+console.log(deleteListButton)
 let container = document.querySelectorAll('#trelloBoard')[0]
 
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
 
-const toggle = document.querySelector('#draggableToggle');
+const textToggle = document.querySelector('#editTextToggle'); //targets toggle that will turn on and off text
+const toggle = document.querySelector('#draggableToggle');  //targets toggle that will toggle between moveable lists and moveable tasks
 
 let draggedItem = null;
 
@@ -15,7 +18,7 @@ let draggedItem = null;
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
     const newList = document.createElement('div');
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin.png" id="editListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
 
     if (toggle.checked == true) {
@@ -44,11 +47,6 @@ const addList = () => {
     }
 }
 
-
-
-const textToggle = document.querySelector('#editTextToggle');
-
-
 function appendTask(e) {
     const newTask = document.createElement('div');
     newTask.innerHTML = 'Click to enter text'
@@ -69,15 +67,13 @@ function appendTask(e) {
 
     e.target.previousElementSibling.appendChild(newTask);
 
+    // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
 }
 
-
-console.log(list_items)
 function makeDraggable() {
     list_items = document.querySelectorAll('.list-item');
     lists = document.querySelectorAll('.list');
-    console.log(list_items)
 
     for (let i = 0; i < list_items.length; i++) {
         const item = list_items[i];
@@ -123,26 +119,31 @@ function makeDraggable() {
     }
 }
 
+//NEED TO FIGURE OUT A WAY TO TOGGLE BETWEEN SO OPACITY DOESNT CHANGE WHEN TASKS ARE MOVED!
 function listDrag() {
-    let lists = document.querySelectorAll('.list');
-    lists.forEach(list => {
-        list.addEventListener('dragstart', () => {
-            list.classList.add('dragging')
+    if (toggle.checked == true) {
+        let lists = document.querySelectorAll('.list');
+        lists.forEach(list => {
+            list.addEventListener('dragstart', () => {
+                list.classList.add('dragging')
+            });
+            list.addEventListener('dragend', () => {
+                list.classList.remove('dragging')
+            });
         });
-        list.addEventListener('dragend', () => {
-            list.classList.remove('dragging')
-        });
-    });
 
-    lists.forEach(list => {
-        list.addEventListener('dragstart', () => {
-            list.classList.add('dragging')
-        });
-        list.addEventListener('dragend', () => {
-            list.classList.remove('dragging')
-        });
-    })
-
+        lists.forEach(list => {
+            list.addEventListener('dragstart', () => {
+                list.classList.add('dragging')
+            });
+            list.addEventListener('dragend', () => {
+                list.classList.remove('dragging')
+            });
+        })
+        return
+    } else {
+        return
+    }
 }
 
 function dropList(e) {
@@ -171,10 +172,6 @@ function getDragAfterElement(container, x) {
 
     }, { offset: Number.NEGATIVE_INFINITY }).element
 }
-
-listDrag();
-makeDraggable();
-document.querySelector('#addListButton').addEventListener('click', addList)
 
 const editTextOn = document.querySelector('#editTextOn');
 const editTextOff = document.querySelector('#editTextOff');
@@ -262,4 +259,10 @@ textToggle.addEventListener('click', () => {
         lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable', 'true'))
     }
 
-}) 
+})
+
+
+listDrag();
+makeDraggable();
+document.querySelector('#addListButton').addEventListener('click', addList)
+addTaskButton.forEach(button => button.addEventListener('click', appendTask))
