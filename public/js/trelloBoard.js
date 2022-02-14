@@ -18,7 +18,25 @@ next_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-console.log(next_position)
+const createTask = async(list_id) => {
+    let taskContent = 'Click to enter text'
+    console.log(list_id)
+    console.log(taskContent)
+    let content = 'Click to enter text'
+    const response = await fetch(`api/tasks/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ list_id, content })
+    })
+    if (response.ok) {
+        console.log('task creation post request has been sent to the server')
+    } else {
+        console.error(response)
+    }
+}
+
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
@@ -89,6 +107,7 @@ function appendTask(e) {
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
+    createTask(listID)
 }
 
 function makeDraggable() {
