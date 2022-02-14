@@ -18,7 +18,7 @@ next_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-const createTask = async(list_id) => {
+const createTask = async (list_id) => {
     let taskContent = 'Click to enter text';
 
     const response = await fetch(`api/trello/tasks/`, {
@@ -35,7 +35,7 @@ const createTask = async(list_id) => {
     }
 }
 
-const createList = async(position_id, list_id) => {
+const createList = async (position_id, list_id) => {
     let listContent = 'Click to enter text';
 
     const response = await fetch(`api/trello/lists`, {
@@ -52,7 +52,7 @@ const createList = async(position_id, list_id) => {
     }
 }
 
-const deleteListColumn = async(id) => {
+const deleteListColumn = async (id) => {
     const response = await fetch(`api/trello/lists/${id}`, {
         method: 'DELETE',
         headers: {
@@ -64,6 +64,25 @@ const deleteListColumn = async(id) => {
     }
 }
 
+const updateLists = async (id, list_content, list_position) => {
+    const response = await fetch(`api/trello/lists/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: { list_content, list_position, },
+    });
+}
+
+const updateTasks = async (list_id, task_Content) => {
+    const response = await fetch(`api/trello/tasks/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: { list_id, task_Content },
+    });
+}
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
@@ -109,7 +128,7 @@ const addList = () => {
 function deleteList(e) {
     let id = e.target.parentNode.parentNode.getAttribute('data-list-id')
     e.target.parentNode.parentNode.remove()
-    
+
     deleteListColumn(id)
 }
 
@@ -204,19 +223,17 @@ function listDrag() {
                 list.classList.remove('dragging')
                 console.log(list.parentNode.children)
                 for (let r = 0; r < list.parentNode.children.length; r++) {
-                    list.parentNode.children[r].setAttribute('data-position', `${r}`)
+                    list.parentNode.children[r].setAttribute('data-position', `${r}`);
+                    let list_id = list.parentNode.children[r].getAttribute('data-list-id');
+                    let list_content = list.parentNode.children[r].children[0].children[0].innerHTML;
+                    let list_position =  list.parentNode.children[r].getAttribute('data-position');
+                    // console.log(list_id)
+                    // console.log(list_content)
+                    // console.log(list_position)
+                    updateLists(list_id, list_content, list_position)
                 }
             });
         });
-
-        // lists.forEach(list => {
-        //     list.addEventListener('dragstart', () => {
-        //         list.classList.add('dragging')
-        //     });
-        //     list.addEventListener('dragend', () => {
-        //         list.classList.remove('dragging')
-        //     });
-        // })
         return
     } else {
         return
