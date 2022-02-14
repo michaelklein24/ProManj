@@ -3,7 +3,6 @@ let lists = document.querySelectorAll('.list'); //targets all column lists on pa
 const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children; //targets trello board container that lists are in
 let addTaskButton = document.querySelectorAll('.addTaskButton') //targets all tasks buttons on page load
 let deleteListButton = document.querySelectorAll('#deleteListButton');
-console.log(deleteListButton)
 let container = document.querySelectorAll('#trelloBoard')[0]
 
 const movableTaskText = document.querySelector('#moveableTasksH6');
@@ -117,8 +116,8 @@ function makeDraggable() {
                 // this.style.backgroundColor = '#374790'
             })
             list.addEventListener('drop', function (e) {
-                console.log(this.children[1])
-                console.log(draggedItem)
+                // console.log(this.children[1])
+                // console.log(draggedItem)
                 this.children[1].appendChild(draggedItem);
                 // this.style.backgroundColor = '#374790'
             })
@@ -137,22 +136,28 @@ function listDrag() {
             });
             list.addEventListener('dragend', () => {
                 list.classList.remove('dragging')
+                console.log(list.parentNode.children)
+                for (let r = 0; r < list.parentNode.children.length; r++) {
+                    list.parentNode.children[r].setAttribute('data-position', `${r}`)
+                }
             });
         });
 
-        lists.forEach(list => {
-            list.addEventListener('dragstart', () => {
-                list.classList.add('dragging')
-            });
-            list.addEventListener('dragend', () => {
-                list.classList.remove('dragging')
-            });
-        })
+        // lists.forEach(list => {
+        //     list.addEventListener('dragstart', () => {
+        //         list.classList.add('dragging')
+        //     });
+        //     list.addEventListener('dragend', () => {
+        //         list.classList.remove('dragging')
+        //     });
+        // })
         return
     } else {
         return
     }
 }
+
+console.log(container)
 
 function dropList(e) {
     e.preventDefault()

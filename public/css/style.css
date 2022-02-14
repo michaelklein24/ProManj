@@ -337,7 +337,7 @@ main {
 
 .noteContent h3 {
     font-size: 20px;
-    padding: 18px 35px;
+    margin: 18px 35px;
     line-height:1.25;
 }
 
@@ -356,6 +356,10 @@ main {
     font-size: 20px;
     font-weight: bold;
     max-width: 20vw;
+}
+
+.messageContact:hover {
+    cursor:text;
 }
 
 .messageListing:hover {
