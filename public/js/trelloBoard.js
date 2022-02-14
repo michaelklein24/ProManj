@@ -54,8 +54,8 @@ const createList = async (position_id, list_id) => {
     }
 }
 
-const deleteListColumn = async (id) => {
-    const response = await fetch(`api/trello/lists/${id}`, {
+const deleteListColumn = async (list_id) => {
+    const response = await fetch(`api/trello/lists/${list_id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -68,14 +68,14 @@ const deleteListColumn = async (id) => {
     }
 }
 
-const updateLists = async (id, list_content, list_position) => {
-    const response = await fetch(`api/trello/lists/${id}`, {
+const updateLists = async (list_id, list_content, list_position) => {
+    const response = await fetch(`api/trello/lists/${list_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: { list_content, list_position, },
-    });
+    })
     if (response.ok) {
         console.log('list update PUT request has been sent to the server')
     } else {
@@ -83,15 +83,20 @@ const updateLists = async (id, list_content, list_position) => {
     }
 }
 
-// const updateTasks = async (list_id, task_Content) => {
-//     const response = await fetch(`api/trello/tasks/`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: { list_id, task_Content },
-//     });
-// }
+const updateTasks = async (task_id, list_id, task_content) => {
+    const response = await fetch(`api/trello/tasks/${task_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: { list_id, task_content },
+    })
+    if (response.ok) {
+        console.log('task update PUT request has been sent to the server')
+    } else {
+        console.error(response)
+    }
+}
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
@@ -216,6 +221,10 @@ function makeDraggable() {
                 draggedItem.setAttribute('data-list-id', list_id)
                 this.children[1].appendChild(draggedItem);
                 // this.style.backgroundColor = '#374790'
+
+                let task_id = draggedItem.getAttribute('data-task-id');
+                let task_content = draggedItem.innerHTML
+                updateTasks(task_id, list_id, task_content)
             })
         }
     }
