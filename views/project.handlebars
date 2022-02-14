@@ -22,8 +22,7 @@
                 
 
                 </div>
-            </div>
-                  <form class="sendMessage d-flex justify-content-between gap-3">
+                <form class="sendMessage d-flex justify-content-between gap-3">
                   <input type="text" placeholder="type message here" class="messageInput">
                   <input type="submit" value="send" class="submitMessage">
 
@@ -31,40 +30,8 @@
                     <img src="./img/send-location.png" id="submitLocation">
                   </div>
                   </form>
-        </div>
+            </div>
             
-
-            <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
-                <div class="d-flex flex-column" id="trelloSection">
-                    <h2 id="projectTitle">Food Locator</h2>
-                    <div class="d-flex justify-content-between">
-                        <h2 id="projectTitle">Food Locator</h2>
-                        <h3 id="addListButton" class="text-white align-self-center">add List</h3>
-                    </div>
-                    <div id="trelloBoard">
-                        <div class="list d-flex flex-column gap-2" draggable="true">
-                            <div class="d-flex justify-content-between align-items-center moveList">
-                                <h3 class="text-white listTitle">To Do</h3>
-                                <img src="./img/pencil_icon.png" id="editListButton">
-                            </div>
-                            <div class="taskList">
-                                <div class="list-item" draggable="true">Add a README.md file</div>
-                                <div class="list-item" draggable="true">List item 2</div>
-                                <div class="list-item" draggable="true">List item 3</div>
-                            </div>
-                            <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
-                        </div>
-                        <div class="list d-flex flex-column gap-2" draggable="true">
-                            <div class="d-flex justify-content-between align-items-center moveList">
-                                <h3 class="text-white listTitle">Doing</h3>
-                                <img src="./img/pencil_icon.png" id="editListButton">
-                            </div>
-                            <div class="taskList">
-                            </div>
-                            <h3 class="text-white addTaskButton"><span class="bold">+</span> Add task</h3>
-                        </div>
-                    </div>
-
       
         <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
             <div class="d-flex flex-column gap-3" id="trelloSection">
@@ -177,6 +144,7 @@
             </div>
         </div>
 
+</div>
 
         <!-- Logout and Update Profile Popup -->
         <div id="profileOptions" class="d-flex flex-column p-4 gap-3 justify-content-around hideDisplay">
@@ -253,13 +221,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    
     <script src="./js/collapsible.js"></script>
-    {{!-- <script src="./js/trelloBoard.js"></script> --}}
+    <script src="./js/trelloBoard.js"></script>
     <script src="./js/profileOptions.js"></script>
-    {{!-- <script src="./js/updateProject.js"></script> --}}
+    <script src="./js/updateProject.js"></script>
     <script src="js/logout.js"></script>
-
+<script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
 
       

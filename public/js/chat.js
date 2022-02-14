@@ -70,7 +70,7 @@ $messageForm.addEventListener("submit", (e) => {
   //disable
   $messageFormButton.setAttribute("disabled", "disabled");
   //   console.log(e.target.elements)
-  const message = e.target.elements.message.value;
+  const message = $messageFormInput.value;
   console.log(message);
   socket.emit("sendMessage", message, (error) => {
     //enable
