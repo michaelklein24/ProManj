@@ -13,12 +13,14 @@ const toggle = document.querySelector('#draggableToggle');  //targets toggle tha
 
 let draggedItem = null;
 
-//This will pull the highest id number for list and then any new list will be given an id after that to ensure no list is given the same id
-next_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
+//This will pull the highest id number for list/task and then any new list/task will be given an id after that to ensure no list/task is given the same id
+next_list_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
+next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute('data-task-id'))));
+
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-const createTask = async (list_id) => {
+const createTask = async (task_id, list_id) => {
     let taskContent = 'Click to enter text';
 
     const response = await fetch(`api/trello/tasks/`, {
@@ -26,7 +28,7 @@ const createTask = async (list_id) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ list_id, taskContent })
+        body: JSON.stringify({ task_id, list_id, taskContent })
     })
     if (response.ok) {
         console.log('task creation POST request has been sent to the server')
@@ -61,38 +63,45 @@ const deleteListColumn = async (id) => {
     })
     if (response.ok) {
         console.log('list deletion DELETE request has been sent to the server')
+    } else {
+        console.error(response)
     }
 }
 
 const updateLists = async (id, list_content, list_position) => {
     const response = await fetch(`api/trello/lists/${id}`, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: { list_content, list_position, },
     });
+    if (response.ok) {
+        console.log('list update PUT request has been sent to the server')
+    } else {
+        console.error(response)
+    }
 }
 
-const updateTasks = async (list_id, task_Content) => {
-    const response = await fetch(`api/trello/tasks/`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: { list_id, task_Content },
-    });
-}
+// const updateTasks = async (list_id, task_Content) => {
+//     const response = await fetch(`api/trello/tasks/`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: { list_id, task_Content },
+//     });
+// }
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
-    next_id++;
+    next_list_id++;
     next_position++;
 
     const newList = document.createElement('div');
     newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin-white.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2');
-    newList.setAttribute('data-list-id', next_id);
+    newList.setAttribute('data-list-id', next_list_id);
     newList.setAttribute('data-position', next_position);
 
     if (toggle.checked == true) {
@@ -121,7 +130,7 @@ const addList = () => {
         listDrag();
     }
 
-    createList(next_position, next_id)
+    createList(next_position, next_list_id)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
@@ -134,6 +143,7 @@ function deleteList(e) {
 
 
 function appendTask(e) {
+    next_task_id++ 
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
     const newTask = document.createElement('div');
@@ -141,6 +151,7 @@ function appendTask(e) {
     newTask.classList.add('list-item')
     newTask.setAttribute('draggable', 'true');
     newTask.setAttribute('data-list-id', listID)
+    newTask.setAttribute('data-task-id', next_task_id)
 
     if (textToggle.checked == true) {
         newTask.setAttribute('contenteditable', 'false');
@@ -158,7 +169,7 @@ function appendTask(e) {
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
-    createTask(listID)
+    createTask(next_task_id, listID)
 }
 
 function makeDraggable() {
@@ -224,9 +235,11 @@ function listDrag() {
                 console.log(list.parentNode.children)
                 for (let r = 0; r < list.parentNode.children.length; r++) {
                     list.parentNode.children[r].setAttribute('data-position', `${r}`);
+
+                    //USED FOR UPDATING DATABASE WITH NEW POSITIONS
                     let list_id = list.parentNode.children[r].getAttribute('data-list-id');
                     let list_content = list.parentNode.children[r].children[0].children[0].innerHTML;
-                    let list_position =  list.parentNode.children[r].getAttribute('data-position');
+                    let list_position = list.parentNode.children[r].getAttribute('data-position');
                     // console.log(list_id)
                     // console.log(list_content)
                     // console.log(list_position)
