@@ -19,21 +19,48 @@ next_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list
 next_position = [...lists].length - 1;
 
 const createTask = async(list_id) => {
-    let taskContent = 'Click to enter text'
-    console.log(list_id)
-    console.log(taskContent)
-    let content = 'Click to enter text'
-    const response = await fetch(`api/tasks/`, {
+    let taskContent = 'Click to enter text';
+
+    const response = await fetch(`api/trello/tasks/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ list_id, content })
+        body: JSON.stringify({ list_id, taskContent })
     })
     if (response.ok) {
-        console.log('task creation post request has been sent to the server')
+        console.log('task creation POST request has been sent to the server')
     } else {
         console.error(response)
+    }
+}
+
+const createList = async(position_id, list_id) => {
+    let listContent = 'Click to enter text';
+
+    const response = await fetch(`api/trello/lists`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ position_id, list_id, listContent })
+    })
+    if (response.ok) {
+        console.log('list creation POST request has been sent to the server')
+    } else {
+        console.error(response)
+    }
+}
+
+const deleteListColumn = async(id) => {
+    const response = await fetch(`api/trello/lists/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if (response.ok) {
+        console.log('list deletion DELETE request has been sent to the server')
     }
 }
 
@@ -74,11 +101,16 @@ const addList = () => {
     } else if (toggle.checked == true) {
         listDrag();
     }
+
+    createList(next_position, next_id)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
 function deleteList(e) {
+    let id = e.target.parentNode.parentNode.getAttribute('data-list-id')
     e.target.parentNode.parentNode.remove()
+    
+    deleteListColumn(id)
 }
 
 
