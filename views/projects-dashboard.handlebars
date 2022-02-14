@@ -5,12 +5,19 @@
         </div>
         <div class="d-flex gap-3 align-items-center align-self-center" id="loginSignUpBtns">
             <h2 id="helloText">Hello Michael!</h2>
-            <button id="logout">logout</button>
             <div id="profileCircle">MK</div>
         </div>
     </header>
     <main>
         <div class="d-flex gap-4" id="bg-color-projects-dashboard">
+            <!-- Logout and Update Profile Popup -->
+            <div id="profileOptions" class="d-flex flex-column p-4 gap-3 justify-content-around hideDisplay">
+                <h3 id="editProfileButton" class="text-center" data-bs-toggle="modal" data-bs-target="#editProfileModel">
+                Edit
+                Profile</h3>
+                <h3 id="logoutButton" class="text-center">Logout</h3>
+            </div>
+
             <div id="messagesColumn" class="d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <h2 id="messengerWord">Messenger</h2>
@@ -73,7 +80,7 @@
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-3 align-items-center messageListing collapsible">
                             <div class="profileCircle">RD</div>
-                            <h3 class="messageContact">Romeo Dixon</h3>
+                            <h3 class="messageContact">{{projects.[0].name}}</h3>
                         </div>
                         <div class="messageCollapsible">
                             <div class="messagesContainer flex-column justify-content-between"></div>
@@ -86,7 +93,7 @@
                     <div class="d-flex flex-column">
                         <div class="d-flex gap-3 align-items-center messageListing collapsible">
                             <div class="profileCircle">RD</div>
-                            <h3 class="messageContact">Romeo Dixon</h3>
+                            <h3 class="messageContact">{{first_name}}</h3>
                         </div>
                         <div class="messageCollapsible">
                             <div class="messagesContainer flex-column justify-content-between"></div>
@@ -100,67 +107,33 @@
             </div>
             <div class="d-flex flex-column gap-4">
                 <div class="d-flex flex-column" id="YourWorkspacesSection">
-                    <h2 id="workspaceSectionTitle">YOUR WORKSPACES</h2>
+                    <h2 id="workspaceSectionTitle">YOUR WORKSPACES{{user_id}}</h2>
                     <hr>
+
+
+
+
                         <div id="projectList">
-                            
+                            {{#each user.projects}}
+                            {{user_id}}
                             <div class="projectItemCustom d-flex flex-column gap-3">
-                                <a href="/project">
-                                <div class="d-flex align-items-end gap-3">
-                                    <div id="projectLogo">F</div>
-                                    <h3 id="projectTitle">Food Locator</h3>
-                                </div>
-                                <div>
-                                    <h4 id="projectDetails"><span class="bold">Description: </span><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></h4>
-                                    <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>02/09/22 at 10:34AM CST</span></h4>
-                                </div>
+                                <a href="/project?username=Romeo&room={{this.id}}">
+                                    <div class="d-flex align-items-end gap-3">
+                                        <div id="projectLogo">{{this.id}}</div>
+                                        <h3 id="projectTitle">{{this.name}}</h3>
+                                    </div>
+                                    <div>
+                                        <h4 id="projectDetails"><span class="bold">Description: </span><span>{{this.description}}</span></h4>
+                                        <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>{{this.date_created}}</span></h4>
+                                    </div>
                                 </a>
                             </div>
-                        
-                            <div class="projectItemCustom d-flex flex-column gap-3">
-                                <div class="d-flex align-items-end gap-3">
-                                    <div id="projectLogo">F</div>
-                                    <h3 id="projectTitle">Food Locator</h3>
-                                </div>
-                                <div>
-                                    <h4 id="projectDetails"><span class="bold">Description: </span><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></h4>
-                                    <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>02/09/22 at 10:34AM CST</span></h4>
-                                </div>
-                            </div>
-                            
-                            <div class="projectItemCustom d-flex flex-column gap-3">
-                                <div class="d-flex align-items-end gap-3">
-                                    <div id="projectLogo">F</div>
-                                    <h3 id="projectTitle">Food Locator</h3>
-                                </div>
-                                <div>
-                                    <h4 id="projectDetails"><span class="bold">Description: </span><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></h4>
-                                    <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>02/09/22 at 10:34AM CST</span></h4>
-                                </div>
-                            </div>
-
-                            <div class="projectItemCustom d-flex flex-column gap-3">
-                                <div class="d-flex align-items-end gap-3">
-                                    <div id="projectLogo">F</div>
-                                    <h3 id="projectTitle">Food Locator</h3>
-                                </div>
-                                <div>
-                                    <h4 id="projectDetails"><span class="bold">Description: </span><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></h4>
-                                    <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>02/09/22 at 10:34AM CST</span></h4>
-                                </div>
-                            </div>
-
-                            <div class="projectItemCustom d-flex flex-column gap-3">
-                                <div class="d-flex align-items-end gap-3">
-                                    <div id="projectLogo">F</div>
-                                    <h3 id="projectTitle">Food Locator</h3>
-                                </div>
-                                <div>
-                                    <h4 id="projectDetails"><span class="bold">Description: </span><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</span></h4>
-                                    <h4 id="projectDetails"><span class="bold">Last Updated: </span><span>02/09/22 at 10:34AM CST</span></h4>
-                                </div>
-                            </div>
+                            {{/each}}
                         </div>
+
+
+
+                        
               
                 </div>
                 <!-- MANAGE WORKSPACES SECTION -->
@@ -168,12 +141,98 @@
                     <h2 id="workspaceSectionTitle">YOUR WORKSPACES</h2>
                     <hr>
                     <div class="d-flex flex-column gap-5">
-                        <h3 id="startProject" class="manageWorkspaceOption">Starting a new project?</h3>
-                        <h3 id="searchForProject" class="manageWorkspaceOption">Search for an existing project?</h3>
+                        <h3 id="startProject" class="manageWorkspaceOption" data-bs-toggle="modal" data-bs-target="#addNewProjectModal">Starting a new project?</h3>
+                        <h3 id="searchForProject" class="manageWorkspaceOption"data-bs-toggle="modal" data-bs-target="#addNewMember">Add members to project</h3>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <script src="js/collapsible.js"></script>
+
+
+
+    <!-- Modal for updating Profile -->
+    <div class="modal fade" id="editProfileModel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form class="d-flex flex-column gap-4 p-4" id="updateProfile">
+                    <h2 class="text-center bold">Update your profile</h2>
+                    <div class="d-flex flex-column align-items-center gap-2">
+                        <input type="text" value="Michael" placeholder="Enter first name" id="updateFirstNameInput">
+                        <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
+                        <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
+                            id="updateEmailInput">
+                        <input type="password" placeholder="Enter your password" id="enterPasswordInput">
+                    </div>
+
+                    <input type="submit" id="updateProfileSubmit">
+                </form>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for creating Project -->
+    <div class="modal fade" id="addNewProjectModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form class="d-flex flex-column gap-4 p-4" id="createProject">
+                    <h2 class="text-center bold">Start a New Project</h2>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectNameInput" class="bold">Project Name</label>
+                            <input type="text" placeholder="Enter project name" id="projectNameInput">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectDescInput" class="bold">Project Description</label>
+                            <textarea type="text"  placeholder="Enter description" id="projectDescInput" rows="5" maxlength="100"></textarea>
+                            <h6 class="text-end"><span id="charsRemaining">100</span> characters remaining</h6>
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#projectEmailInput" class="bold">Add Members</label>
+                            <div class="d-flex gap-3">
+                                <input type="text"  placeholder="Enter email" id="projectEmailInput">
+                                <h4 id="addEmailButton">Add</h4>
+                            </div>
+                            <div id="emailList" class="d-flex gap-1 flex-wrap">                               
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" id="createProjectSubmit" value="Create">
+                </form>
+            </div>
+        </div>
+    </div>
+      <!-- Modal for adding task -->
+     <div class="modal fade" id="addNewMember" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form class="d-flex flex-column gap-4 p-4" id="createProject">
+                    <h2 class="text-center bold">Add members to project</h2>
+                    <div class="d-flex flex-column gap-2">
+                        <div class="d-flex flex-column gap-1">
+                            <label for="#memberNameInput" class="bold">Add Member</label>
+                            <input type="text" placeholder="Enter Member name" id="memberNameInput">
+                        </div>
+                        <div class="d-flex flex-column gap-1">
+                           <label for="#addprojectName" class="bold">Project Name</label>
+                            <input type="text" placeholder="Enter project name" id="addprojectName">
+                        </div>
+                       
+                    </div>
+                    <input type="submit" id="addMemberSubmit" value="Create">
+                </form>
+            </div>
+        </div>
+    </div> 
+<script src="js/collapsible.js"></script>
+    <script src="./js/profileOptions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script src="./js/createUsertoProject.js"></script>
+
+    <script src="./js/createProject.js"></script>
+{{!-- <script src="./js/updateProfile.js"></script> --}}
+    
     <script src="js/logout.js"></script>

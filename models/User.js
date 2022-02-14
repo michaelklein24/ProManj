@@ -9,7 +9,7 @@ class User extends Model {
     
   }
 }
-//first and last name
+
 User.init(
   {
     id: {

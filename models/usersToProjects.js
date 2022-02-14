@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Trip model
+
 class usersToProjects extends Model {}
 
-// create fields/columns for Trip model
+
 usersToProjects.init(
   {
     id: {
