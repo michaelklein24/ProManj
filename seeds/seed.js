@@ -11,6 +11,8 @@ const seedDatabase = async () => {
 
   const user = await User.bulkCreate(userSeedData);
 
+  
+
   // Create trips at random
   for (let i = 0; i < 10; i++) {
     // Get a random traveller's `id`

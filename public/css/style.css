@@ -726,12 +726,24 @@ main {
     padding: 6px 10px;
     background-color: #d8d4d47e;
 }
+#memberNameInput {
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color: #d8d4d47e;
+}
 
 #projectDescInput {
     border: none;
     border-radius: 4px;
     padding: 6px 10px;
     height: 7vh;
+    background-color: #d8d4d47e;
+}
+#addprojectName{
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
     background-color: #d8d4d47e;
 }
 
@@ -775,6 +787,20 @@ main {
 }
 
 #createProjectSubmit:hover {
+    background-color: #3a4eb3;
+}
+
+#addMemberSubmit {
+    background-color: #536DF4;
+    color:white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding:6px 10px;
+    flex-shrink: 0;
+}
+
+#addMemberSubmit:hover {
     background-color: #3a4eb3;
 }
 

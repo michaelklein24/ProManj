@@ -45,17 +45,22 @@ projectDescInput.addEventListener('keydown', () => {
 //FETCH POST
 const createProjectHandler = async (e) => {
     e.preventDefault();
-    const projectName = projectNameInput.value.trim();
-    const projectDesc = projectDescInput.value.trim();
+    const name = projectNameInput.value.trim();
+    const description = projectDescInput.value.trim();
+console.log(name)
+console.log(description)
 
-    if (projectName && projectDesc) {
+    if (name && description) {
         const response = await fetch('/api/projects', {
             method: 'POST',
-            body: JSON.stringify({ projectName, projectDesc, }),
+            body: JSON.stringify({ name, description, }),
             headers: { 'Content-Type': 'application/json' },
         })
-        const data = await response.json();
-        return data
+        if(response.ok){
+            document.location.replace('/users')
+        }else{
+            alert('Failed to create project')
+        }
     }
 }
 

@@ -15,38 +15,45 @@ router.get("/users", async (req, res) => {
       include: [{ model: Project}],
     });
 
+
     const user = userData.get({ plain: true });
+    const userProjects = user.projects
+    console.log(userProjects)
     console.log(user)
     res.render('projects-dashboard', {
-      ...user,
+      user,
+      user_id: req.session.user_id,
       logged_in: true
     });
   } catch (err) {
     res.status(500).json(err);
   }
-  // res.render('projects-dashboard')
+  
 
 });
 
 router.get("/project", async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
+   
+   
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Project }],
-    });
+    })
+     
     
     const user = userData.get({ plain: true });
     console.log(user)
     
+    
     res.render('project', {
       ...user,
-      logged_in: true
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-  // res.render('project')
+
 });
 
 
