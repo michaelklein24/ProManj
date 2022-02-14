@@ -18,7 +18,7 @@ let draggedItem = null;
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
     const newList = document.createElement('div');
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin-white.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
 
     if (toggle.checked == true) {
@@ -37,6 +37,7 @@ const addList = () => {
 
     // ADD EVENT LISTENER TO NEWLY ADDED LIST'S ADD TASK BUTTON
     newList.children[2].addEventListener('click', appendTask)
+    newList.children[0].children[1].addEventListener('click', deleteList)
 
     // IF TOGGLE FOR DRAGGING LISTS IS ENABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     // IF TOGGLE FOR DRAGGING LISTS IS DISABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
@@ -46,6 +47,12 @@ const addList = () => {
         listDrag();
     }
 }
+
+// RESPONSIBLE FOR DELETE LIST COLUMN
+function deleteList(e) {
+    e.target.parentNode.parentNode.remove()
+}
+
 
 function appendTask(e) {
     const newTask = document.createElement('div');
@@ -266,3 +273,4 @@ listDrag();
 makeDraggable();
 document.querySelector('#addListButton').addEventListener('click', addList)
 addTaskButton.forEach(button => button.addEventListener('click', appendTask))
+deleteListButton.forEach(button => button.addEventListener('click', deleteList))
