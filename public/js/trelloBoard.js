@@ -4,6 +4,65 @@ const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children; //tar
 let addTaskButton = document.querySelectorAll('.addTaskButton') //targets all tasks buttons on page load
 let deleteListButton = document.querySelectorAll('#deleteListButton');
 let container = document.querySelectorAll('#trelloBoard')[0]
+let listTitle = document.querySelectorAll('.listTitle')
+
+let typingTimer
+let doneTypingInterval = 3000;
+listTitle.forEach(title => title.addEventListener('keyup', (e) => {
+    let list = e.target.parentNode.parentNode;
+    let id = list.getAttribute('data-list-id');
+    let position = list.getAttribute('data-position');
+    let content = e.target.innerHTML
+
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+        // console.log(id)
+        // console.log(content)
+        // console.log(position)
+        updateLists(id, content, position)
+    }, 3000);
+}));
+
+listTitle.forEach(title => title.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+}));
+
+
+
+
+
+
+
+
+
+
+
+
+// function timer() {
+//     let timeLeft = 2;
+//     var timerInterval = setInterval(() => {
+//         timeLeft--;
+//         console.log(timeLeft);
+//         if()
+//         if(timeLeft <= 0) {
+//             clearInterval(timerInterval);
+//         }
+//     }, 1000);
+// };
+
+
+
+// listTitle.forEach(title => title.addEventListener('keypress', timer));
+
+
+
+
+
+
+
+
+
+
 
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
@@ -135,7 +194,7 @@ const addList = () => {
         listDrag();
     }
 
-    createList(next_position, next_list_id)
+    // createList(next_position, next_list_id)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
@@ -148,7 +207,7 @@ function deleteList(e) {
 
 
 function appendTask(e) {
-    next_task_id++ 
+    next_task_id++
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
     const newTask = document.createElement('div');
@@ -174,7 +233,7 @@ function appendTask(e) {
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
-    createTask(next_task_id, listID)
+    // createTask(next_task_id, listID)
 }
 
 function makeDraggable() {
@@ -224,7 +283,7 @@ function makeDraggable() {
 
                 let task_id = draggedItem.getAttribute('data-task-id');
                 let task_content = draggedItem.innerHTML
-                updateTasks(task_id, list_id, task_content)
+                // updateTasks(task_id, list_id, task_content)
             })
         }
     }
@@ -252,7 +311,7 @@ function listDrag() {
                     // console.log(list_id)
                     // console.log(list_content)
                     // console.log(list_position)
-                    updateLists(list_id, list_content, list_position)
+                    // updateLists(list_id, list_content, list_position)
                 }
             });
         });
