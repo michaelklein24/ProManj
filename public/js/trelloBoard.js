@@ -1,18 +1,13 @@
-let list_items = document.querySelectorAll('.list-item');
-let lists = document.querySelectorAll('.list');
-const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children;
-let addTaskButton = document.querySelectorAll('.addTaskButton')
+let list_items = document.querySelectorAll('.list-item'); //targets all tasks items on page load
+let lists = document.querySelectorAll('.list'); //targets all column lists on page load
+const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children; //targets trello board container that lists are in
+let addTaskButton = document.querySelectorAll('.addTaskButton') //targets all tasks buttons on page load
 let container = document.querySelectorAll('#trelloBoard')[0]
 
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
 
-// toggle.checked == true
-// enable List movement and disable item movement
-// toggle.checked == false
 const toggle = document.querySelector('#draggableToggle');
-
-
 
 let draggedItem = null;
 
@@ -20,7 +15,7 @@ let draggedItem = null;
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
     const newList = document.createElement('div');
-    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/pencil_icon.png" id="editListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
+    newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin.png" id="editListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
 
     if (toggle.checked == true) {
@@ -37,71 +32,53 @@ const addList = () => {
 
     document.querySelector('#trelloBoard').appendChild(newList)
 
-    //ADD EVENT LISTENER TO NEWLY ADDED LIST'S ADD TASK BUTTON
+    // ADD EVENT LISTENER TO NEWLY ADDED LIST'S ADD TASK BUTTON
     newList.children[2].addEventListener('click', appendTask)
 
     // IF TOGGLE FOR DRAGGING LISTS IS ENABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     // IF TOGGLE FOR DRAGGING LISTS IS DISABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     if (toggle.checked == false) {
         makeDraggable()
-    }
-    // })
-    if (toggle.checked == true) {
+    } else if (toggle.checked == true) {
         listDrag();
     }
 }
 
 
-function addTask() {
-    console.log('click')
-    // for (let k = 0; k < addTaskButton.length; k++) {
-    const taskButton = addTaskButton[list_items.length - 1]
-    console.log(taskButton)
-    taskButton.addEventListener('click', function () {
-        const newTask = document.createElement('div');
-        newTask.innerHTML = 'Click to enter text'
-        newTask.classList.add('list-item')
-        newTask.setAttribute('draggable', 'true');
-        if (textToggle.checked == true) {
-            newTask.setAttribute('contenteditable', 'false');
-        } else {
-            newTask.setAttribute('contenteditable', 'true');
-        }
-        taskButton.previousElementSibling.append(newTask);
-        list_items = document.querySelectorAll('.list-item');
-        console.log(list_items);
-        if (toggle.checked == false) {
-            console.log('box is unchecked')
-            // makeDraggable();
-        };
-    });
-    // };
-};
 
 const textToggle = document.querySelector('#editTextToggle');
 
 
-function appendTask() {
-    for (let z = 0; z < addTaskButton.length; z++) {
-        const newTask = document.createElement('div');
-        newTask.innerHTML = 'Click to enter text'
-        newTask.classList.add('list-item')
-        newTask.setAttribute('draggable', 'true');
-        if (textToggle.checked == true) {
-            newTask.setAttribute('contenteditable', 'false');
-        } else {
-            newTask.setAttribute('contenteditable', 'true');
-        }
-        console.log(this)
-        this.previousElementSibling.append(newTask);
+function appendTask(e) {
+    const newTask = document.createElement('div');
+    newTask.innerHTML = 'Click to enter text'
+    newTask.classList.add('list-item')
+    newTask.setAttribute('draggable', 'true');
+
+    if (textToggle.checked == true) {
+        newTask.setAttribute('contenteditable', 'false');
+    } else {
+        newTask.setAttribute('contenteditable', 'true');
     }
+
+    if (toggle.checked == false) {
+        newTask.setAttribute('draggable', 'true');
+    } else if (toggle.checked == true) {
+        newTask.setAttribute('draggable', 'false');
+    }
+
+    e.target.previousElementSibling.appendChild(newTask);
+
+    makeDraggable();
 }
 
 
-
-
+console.log(list_items)
 function makeDraggable() {
-    // list_items = document.querySelectorAll('.list-item');
+    list_items = document.querySelectorAll('.list-item');
+    lists = document.querySelectorAll('.list');
+    console.log(list_items)
+
     for (let i = 0; i < list_items.length; i++) {
         const item = list_items[i];
 
@@ -137,6 +114,8 @@ function makeDraggable() {
                 // this.style.backgroundColor = '#374790'
             })
             list.addEventListener('drop', function (e) {
+                console.log(this.children[1])
+                console.log(draggedItem)
                 this.children[1].appendChild(draggedItem);
                 // this.style.backgroundColor = '#374790'
             })
