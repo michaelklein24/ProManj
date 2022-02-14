@@ -19,8 +19,8 @@ const updateProfileHandler = async (e) => {
     const password = enterPasswordInput.value
 
 
-    const response 
-    const data = await response.json();
+    // const response 
+    // const data = await response.json();
     return data= await fetch(`api/profile/${id}`, {
         method: 'PUT',  //Or did you PATCH romeo?
         body: JSON.stringify( {firstName, lastName, email} ),
