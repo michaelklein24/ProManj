@@ -302,8 +302,24 @@ main {
     color:white;
 }
 
+#saveNoteButton {
+    height:20px;
+    transition: .2s ease-in-out;
+}
+
 #deleteNoteButton {
     height:20px;
+    transition: .2s ease-in-out;
+}
+
+#saveNoteButton:hover {
+    background-color: #00681a56;
+    box-shadow: 0 0 10px 3px #00681a56;
+}
+
+#deleteNoteButton:hover {
+    background-color: #9e010154;
+    box-shadow: 0 0 10px 3px #9e010154;
 }
 
 .noteContent {
@@ -315,17 +331,14 @@ main {
     max-height: 0;
     overflow: hidden;
     transition: max-height .3s ease-out;
+    overflow-y: scroll;
+
 }
 
 .noteContent h3 {
     font-size: 20px;
     padding: 18px 35px;
     line-height:1.25;
-}
-
-.noteContent {
-    max-width: 32.85vw;
-    overflow-y: scroll;
 }
 
 .noteContent::-webkit-scrollbar {

@@ -27,13 +27,17 @@
             <div class="d-flex flex-column gap-3" id="messagesList">
 
                 {{!-- INDIVIDUAL NOTE -- {{EACH NOTES as |NOTE|--}}
-                <div class="d-flex flex-column">
+                <div class="d-flex flex-column" data-note-id="1">
                     <div class="d-flex justify-content-between align-items-center messageListing collapsible">
                         <h3 class="messageContact collapsible" contenteditable='true'>Need to do</h3>
-                        <img id='deleteNoteButton' src="/img/bin.png">
+                        <div class="d-flex gap-3">
+                            <img id="saveNoteButton" src="/img/save.png">
+                            <img id='deleteNoteButton' src="/img/bin.png">
+                        </div>
                     </div>
                     <div class="noteContent">
-                        <h3 contenteditable='true'><strong>Things to do:</strong><br><strong>1.</strong> fix all bugs on Trello Board<br><strong>2.</strong> add Delete Columns button</h3>
+                        <h3 contenteditable='true'>1. fix all bugs on
+                            Trello Board<br>2. add Delete Columns button</h3>
                     </div>
                 </div>
                 {{!-- INDIVIDUAL NOTE -- {{/EACH}} --}}
@@ -195,9 +199,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
-<script src="js/collapsible.js"></script>
 <script src="js/profileOptions.js"></script>
 <script src="js/createProject.js"></script>
 <script src="js/updateProfile.js"></script>
+
 {{!-- <script src="js/logout.js"></script> --}}
 <script src="js/notes.js"></script>

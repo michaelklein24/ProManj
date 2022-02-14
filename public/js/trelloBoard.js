@@ -126,6 +126,7 @@ function makeDraggable() {
     }
 }
 
+// stopPropagation() TRY THIS !!!!!!!!!!
 //NEED TO FIGURE OUT A WAY TO TOGGLE BETWEEN SO OPACITY DOESNT CHANGE WHEN TASKS ARE MOVED!
 function listDrag() {
     if (toggle.checked == true) {
