@@ -6,64 +6,6 @@ let deleteListButton = document.querySelectorAll('#deleteListButton');
 let container = document.querySelectorAll('#trelloBoard')[0]
 let listTitle = document.querySelectorAll('.listTitle')
 
-let typingTimer
-let doneTypingInterval = 3000;
-listTitle.forEach(title => title.addEventListener('keyup', (e) => {
-    let list = e.target.parentNode.parentNode;
-    let id = list.getAttribute('data-list-id');
-    let position = list.getAttribute('data-position');
-    let content = e.target.innerHTML
-
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(() => {
-        // console.log(id)
-        // console.log(content)
-        // console.log(position)
-        updateLists(id, content, position)
-    }, 3000);
-}));
-
-listTitle.forEach(title => title.addEventListener('keydown', () => {
-    clearTimeout(typingTimer)
-}));
-
-
-
-
-
-
-
-
-
-
-
-
-// function timer() {
-//     let timeLeft = 2;
-//     var timerInterval = setInterval(() => {
-//         timeLeft--;
-//         console.log(timeLeft);
-//         if()
-//         if(timeLeft <= 0) {
-//             clearInterval(timerInterval);
-//         }
-//     }, 1000);
-// };
-
-
-
-// listTitle.forEach(title => title.addEventListener('keypress', timer));
-
-
-
-
-
-
-
-
-
-
-
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
 
@@ -156,6 +98,48 @@ const updateTasks = async (task_id, list_id, task_content) => {
         console.error(response)
     }
 }
+
+let typingTimer
+let timeLength = 3000;
+listTitle.forEach(title => title.addEventListener('keyup', (e) => {
+    let list = e.target.parentNode.parentNode;
+    let id = list.getAttribute('data-list-id');
+    let position = list.getAttribute('data-position');
+    let content = e.target.innerHTML
+
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+        // console.log(id)
+        // console.log(content)
+        // console.log(position)
+        updateLists(id, content, position)
+    }, timeLength);
+}));
+
+listTitle.forEach(title => title.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+}));
+
+
+list_items.forEach(task => task.addEventListener('keyup', (e)=> {
+    let task = e.target
+    let task_id = task.getAttribute('data-task-id')
+    let list_id = task.getAttribute('data-list-id')
+    let task_content = task.innerHTML
+
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+        console.log(task_id)
+        console.log(list_id)
+        console.log(task_content)
+        updateTasks(task_id, list_id, task_content)
+    }, timeLength);
+}))
+
+list_items.forEach(task => task.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+}));
+
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
