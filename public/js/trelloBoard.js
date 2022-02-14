@@ -13,12 +13,23 @@ const toggle = document.querySelector('#draggableToggle');  //targets toggle tha
 
 let draggedItem = null;
 
+//This will pull the highest id number for list and then any new list will be given an id after that to ensure no list is given the same id
+next_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
+//This will give the list the next available position number
+next_position = [...lists].length - 1;
+
+console.log(next_position)
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
 const addList = () => {
+    next_id++;
+    next_position++;
+
     const newList = document.createElement('div');
     newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin-white.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
-    newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2')
+    newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2');
+    newList.setAttribute('data-list-id', next_id);
+    newList.setAttribute('data-position', next_position);
 
     if (toggle.checked == true) {
         newList.setAttribute('draggable', 'true');
@@ -54,10 +65,13 @@ function deleteList(e) {
 
 
 function appendTask(e) {
+    let listID = e.target.parentNode.getAttribute('data-list-id')
+
     const newTask = document.createElement('div');
     newTask.innerHTML = 'Click to enter text'
     newTask.classList.add('list-item')
     newTask.setAttribute('draggable', 'true');
+    newTask.setAttribute('data-list-id', listID)
 
     if (textToggle.checked == true) {
         newTask.setAttribute('contenteditable', 'false');
@@ -116,8 +130,9 @@ function makeDraggable() {
                 // this.style.backgroundColor = '#374790'
             })
             list.addEventListener('drop', function (e) {
-                // console.log(this.children[1])
                 // console.log(draggedItem)
+                let list_id = this.getAttribute('data-list-id')
+                draggedItem.setAttribute('data-list-id', list_id)
                 this.children[1].appendChild(draggedItem);
                 // this.style.backgroundColor = '#374790'
             })
@@ -156,8 +171,6 @@ function listDrag() {
         return
     }
 }
-
-console.log(container)
 
 function dropList(e) {
     e.preventDefault()

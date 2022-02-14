@@ -38,7 +38,7 @@
         </div>
         <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
             <div class="d-flex flex-column gap-3" id="trelloSection">
-                <div id='trelloTitleBar'class="d-flex justify-content-between align-items-center">
+                <div id='trelloTitleBar' class="d-flex justify-content-between align-items-center">
                     <h2 id="projectTitle">Food Locator</h2>
 
                     <div class="d-flex gap-3 align-items-center" id="trelloOptionsBar">
@@ -51,7 +51,7 @@
                             </div>
                             <input type="checkbox" id="draggableToggle">
                         </div>
-                        
+
                         <div class="vr"></div>
                         <div class="d-flex gap-2 align-items-center" id="editTextToggleDiv">
                             <input type="checkbox" id="editTextToggle">
@@ -74,17 +74,22 @@
                 <div id="trelloBoard" class="d-flex gap-3">
 
 
-                    <div class="list d-flex flex-column gap-2" data-list-id="1" data-position="2">
+                    <div class="list d-flex flex-column gap-2" data-list-id="1" data-position="0">
                         <div class="d-flex justify-content-between align-items-center moveList">
                             <h3 class="text-white listTitle" contenteditable="true">To Do</h3>
                             <img src="./img/bin-white.png" id="deleteListButton">
                         </div>
-                        <div class="taskList"><div class="list-item" draggable="true" contenteditable="true">Add a README.md file</div>
-                            <div class="list-item" draggable="true" contenteditable="true">List item 2</div>
-                            <div class="list-item" draggable="true" contenteditable="true">List item 3</div></div>
+                        <div class="taskList">
+                            <div class="list-item" draggable="true" contenteditable="true" data-list-id="1">Add a
+                                README.md file</div>
+                            <div class="list-item" draggable="true" contenteditable="true" data-list-id="1">List item 2
+                            </div>
+                            <div class="list-item" draggable="true" contenteditable="true" data-list-id="1">List item 3
+                            </div>
+                        </div>
                         <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
                     </div>
-                    <div class="list d-flex flex-column gap-2" data-list-id="2" data-position="3">
+                    <div class="list d-flex flex-column gap-2" data-list-id="2" data-position="1">
                         <div class="d-flex justify-content-between align-items-center moveList">
                             <h3 class="text-white listTitle" contenteditable="true">Doing</h3>
                             <img src="./img/bin-white.png" id="deleteListButton">
