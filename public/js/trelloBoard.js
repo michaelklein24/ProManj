@@ -99,8 +99,10 @@ const updateTasks = async (task_id, list_id, task_content) => {
     }
 }
 
+// =================================================================================================================================================
+
 let typingTimer
-let timeLength = 3000;
+let timeLength = 1000;
 listTitle.forEach(title => title.addEventListener('keyup', (e) => {
     let list = e.target.parentNode.parentNode;
     let id = list.getAttribute('data-list-id');
@@ -170,6 +172,27 @@ const addList = () => {
     newList.children[2].addEventListener('click', appendTask)
     newList.children[0].children[1].addEventListener('click', deleteList)
 
+    let newListTitle = newList.children[0].children[0]
+    newListTitle.addEventListener('keyup', (e) => {
+        let id = newList.getAttribute('data-list-id');
+        let position = newList.getAttribute('data-position');
+        let content = e.target.innerHTML
+    
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            console.log(id)
+            console.log(content)
+            console.log(position)
+            updateLists(id, content, position)
+        }, timeLength);
+    });
+    
+    newListTitle.addEventListener('keydown', () => {
+        clearTimeout(typingTimer)
+    });
+
+
+
     // IF TOGGLE FOR DRAGGING LISTS IS ENABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     // IF TOGGLE FOR DRAGGING LISTS IS DISABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     if (toggle.checked == false) {
@@ -178,7 +201,7 @@ const addList = () => {
         listDrag();
     }
 
-    // createList(next_position, next_list_id)
+    createList(next_position, next_list_id)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
@@ -213,11 +236,32 @@ function appendTask(e) {
         newTask.setAttribute('draggable', 'false');
     }
 
+    newTask.addEventListener('keyup', (e) => {
+        let task = e.target
+        let task_id = task.getAttribute('data-task-id')
+        let list_id = task.getAttribute('data-list-id')
+        let task_content = task.innerHTML
+    
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            console.log(task_id)
+            console.log(list_id)
+            console.log(task_content)
+            updateTasks(task_id, list_id, task_content)
+        }, timeLength);
+    })
+    
+    newTask.addEventListener('keydown', () => {
+        clearTimeout(typingTimer)
+    });
+
+
+
     e.target.previousElementSibling.appendChild(newTask);
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
-    // createTask(next_task_id, listID)
+    createTask(next_task_id, listID)
 }
 
 function makeDraggable() {
@@ -267,7 +311,7 @@ function makeDraggable() {
 
                 let task_id = draggedItem.getAttribute('data-task-id');
                 let task_content = draggedItem.innerHTML
-                // updateTasks(task_id, list_id, task_content)
+                updateTasks(task_id, list_id, task_content)
             })
         }
     }
@@ -295,7 +339,7 @@ function listDrag() {
                     // console.log(list_id)
                     // console.log(list_content)
                     // console.log(list_position)
-                    // updateLists(list_id, list_content, list_position)
+                    updateLists(list_id, list_content, list_position)
                 }
             });
         });
@@ -417,7 +461,6 @@ textToggle.addEventListener('click', () => {
         list_items.forEach(item => item.setAttribute('contenteditable', 'true'))
         lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable', 'true'))
     }
-
 })
 
 
