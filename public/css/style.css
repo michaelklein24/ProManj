@@ -274,6 +274,10 @@ main {
     overflow-y: scroll;
     height: 100%;
 }
+#messagesList::-webkit-scrollbar {
+    display: none;
+}
+
 
 #addMessageIcon {
     height:31px;
@@ -298,34 +302,79 @@ main {
     color:white;
 }
 
-.messageCollapsible {
-    display:none;
-    border-radius: 6px;
-    height:50vh;
+#saveNoteButton {
+    height:20px;
+    transition: .2s ease-in-out;
+}
+
+#deleteNoteButton {
+    height:20px;
+    transition: .2s ease-in-out;
+}
+
+#saveNoteButton:hover {
+    background-color: #00681a56;
+    box-shadow: 0 0 10px 3px #00681a56;
+}
+
+#deleteNoteButton:hover {
+    background-color: #9e010154;
+    box-shadow: 0 0 10px 3px #9e010154;
+}
+
+.noteContent {
+    display:block;
+    line-break: auto;
+    border-radius:0 0 6px 6px;
     padding:8px;
-    background-color: #C4C4C4;
+    background-image: url('/img/notepad.png');
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease-out;
+    overflow-y: scroll;
+
+}
+
+.noteContent h3 {
+    font-size: 20px;
+    margin: 18px 35px;
+    line-height:1.25;
+}
+
+.noteContent::-webkit-scrollbar {
+    display: none;
 }
 
 .messageListing {
+    background-color: #593b3b75;
     padding:10px;
-    border-radius: 6px;
+    border-radius: 6px 6px 0 0;
+    user-select: none;
 }
 
 .messageContact {
     font-size: 20px;
     font-weight: bold;
+    max-width: 20vw;
+}
+
+.messageContact:hover {
+    cursor:text;
 }
 
 .messageListing:hover {
     cursor: pointer;
-    background-color: #C4C4C4;
 }
-
+/* 
 .messagesContainer {
-    height: 90%;
-    overflow-y: scroll;
     
-}
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    
+} */
 
 .messageInput {
     width: 80%;
@@ -460,7 +509,6 @@ main {
     background-color: white;
     padding:18px;
     border-radius: 6px;
-    min-width: 380px;
     /* max-width: 450px; */
     width:50%;
     box-shadow: 0 0 100px -43px #001789b6;
@@ -476,19 +524,12 @@ main {
         height: 70%
 }
 
-#addListButton {
-    cursor: pointer;
-    background-color: #374785;
-    border-radius: 6px;
-    padding: 4px 6px
-} 
-
 #memberOptionsRow {
     height: 230px;
 }
 
 #projectTitle {
-    font-size: 36px;
+    font-size: 2.2vw;
     font-weight: bold;
 }
 
@@ -769,7 +810,7 @@ main {
     }
 
     #trelloBoard {
-        height: 70vh;
+        height: 57vh;
     }
 
     #memberOptionsRow {
