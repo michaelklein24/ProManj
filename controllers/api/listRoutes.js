@@ -3,38 +3,34 @@ const { List, Task } = require('../../models');
 
 list.get('/', async (req, res) => {
     try {
-        const listData = await List.findAll()
-
+        const listData = await List.findAll({
+            include: [{ model: Task }]
+        })
         res.status(200).json(listData)
     } catch (err) {
         res.status(500).json(err)
     }
 })
 
-list.get('/:id', async (req, res) => {
-    try {
-        const listData = await List.findByPk(req.params.id, {})
-        if (!listData) {
-            res.status(404).json(listData)
-        } else {
-            res.status(200).json(listData)
-        }
-    } catch (err) {
-        res.status(500).json(err)
-    }
-})
+// list.get('/:id', async (req, res) => {
+//     try {
+//         const listData = await List.findByPk(req.params.id, {})
+//         if (!listData) {
+//             res.status(404).json(listData)
+//         } else {
+//             res.status(200).json(listData)
+//         }
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// })
 
 list.post('/', async (req, res) => {
-    console.log(req.body)
-    // list_content: req.body.listContent,
-    // list_id: req.body.list_id,
-    // list_position: req.body.position_id,
+    // "list_content":"hello",
+    // "position":1,
+    // "project_id":1
     try {
-        const listData = await List.create({
-            listContent: req.body.listContent,
-            // list_id: req.body.list_id,
-            position_id: req.body.position_id,
-        })
+        const listData = await List.create(req.body)
         res.status(200).json(listData)
     } catch (err) {
         res.status(500).json(err)
@@ -43,16 +39,11 @@ list.post('/', async (req, res) => {
 
 list.put('/:id', async (req, res) => {
     try {
-        const listData = await List.update(
-            {
-                list_content: req.body.list_content,
-                position: req.body.position,
+        const listData = await List.update(req.body, {
+            where: {
+                id: req.params.id
             },
-            {
-                where: {
-                    id: req.params.id
-                },
-            })
+        })
         if (!listData) {
             res.status(404).json(listData)
         } else {

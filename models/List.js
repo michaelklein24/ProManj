@@ -17,7 +17,7 @@ List.init(
         },
         position: {
             type:DataTypes.INTEGER,
-            allowNull: false,
+            notNull: true,
         },
         project_id: {
             type: DataTypes.INTEGER,

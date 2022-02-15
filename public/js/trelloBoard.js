@@ -21,15 +21,30 @@ next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute(
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-const createTask = async (task_id, list_id) => {
-    let taskContent = 'Click to enter text';
+// const getNextAvailableTaskId = async () => {
+//     let response = await fetch('/api/task/', {
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//     })
+//     let data = await response.json()
+//     console.log(data)
+//     return Math.max(...data.map(object => Number(object.id)))
+    
+// }
+// console.log(getNextAvailableTaskId().then(highestTaskId => {return highestTaskId}))
 
-    const response = await fetch(`api/trello/tasks/`, {
+
+const createTask = async (task_id, list_id) => {
+    let task_content = 'Click to enter text';
+
+    const response = await fetch(`api/task/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task_id, list_id, taskContent })
+        body: JSON.stringify({ list_id: list_id, task_content: task_content })
     })
     if (response.ok) {
         console.log('task creation POST request has been sent to the server')
@@ -38,15 +53,15 @@ const createTask = async (task_id, list_id) => {
     }
 }
 
-const createList = async (position_id, list_id) => {
-    let listContent = 'Click to enter text';
+const createList = async (position, list_id, project_id) => {
+    let list_content = 'Click to enter text';
 
-    const response = await fetch(`api/trello/lists`, {
+    const response = await fetch(`/api//list`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ position_id, list_id, listContent })
+        body: JSON.stringify({ position:position, list_content:list_content, project_id:project_id })
     })
     if (response.ok) {
         console.log('list creation POST request has been sent to the server')
@@ -56,7 +71,7 @@ const createList = async (position_id, list_id) => {
 }
 
 const deleteListColumn = async (list_id) => {
-    const response = await fetch(`api/trello/lists/${list_id}`, {
+    const response = await fetch(`/api/list/${list_id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -69,13 +84,14 @@ const deleteListColumn = async (list_id) => {
     }
 }
 
+// THIS WORKS ON INSOMNIA BUT ISNT WORKING HERE...
 const updateLists = async (list_id, list_content, list_position) => {
-    const response = await fetch(`api/trello/lists/${list_id}`, {
+    const response = await fetch(`/api/list/${list_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: { list_content, list_position, },
+        body: JSON.stringify({ list_content:list_content, position:list_position }),
     })
     if (response.ok) {
         console.log('list update PUT request has been sent to the server')
@@ -84,13 +100,14 @@ const updateLists = async (list_id, list_content, list_position) => {
     }
 }
 
+
 const updateTasks = async (task_id, list_id, task_content) => {
-    const response = await fetch(`api/trello/tasks/${task_id}`, {
+    const response = await fetch(`/api/task/${task_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: { list_id, task_content },
+        body: JSON.stringify({ list_id:list_id, task_content:task_content }),
     })
     if (response.ok) {
         console.log('task update PUT request has been sent to the server')
@@ -98,6 +115,9 @@ const updateTasks = async (task_id, list_id, task_content) => {
         console.error(response)
     }
 }
+
+updateTasks(1, 2, 'test')
+
 
 // =================================================================================================================================================
 
@@ -123,7 +143,7 @@ listTitle.forEach(title => title.addEventListener('keydown', () => {
 }));
 
 
-list_items.forEach(task => task.addEventListener('keyup', (e)=> {
+list_items.forEach(task => task.addEventListener('keyup', (e) => {
     let task = e.target
     let task_id = task.getAttribute('data-task-id')
     let list_id = task.getAttribute('data-list-id')
@@ -177,7 +197,7 @@ const addList = () => {
         let id = newList.getAttribute('data-list-id');
         let position = newList.getAttribute('data-position');
         let content = e.target.innerHTML
-    
+
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
             console.log(id)
@@ -186,7 +206,7 @@ const addList = () => {
             updateLists(id, content, position)
         }, timeLength);
     });
-    
+
     newListTitle.addEventListener('keydown', () => {
         clearTimeout(typingTimer)
     });
@@ -241,7 +261,7 @@ function appendTask(e) {
         let task_id = task.getAttribute('data-task-id')
         let list_id = task.getAttribute('data-list-id')
         let task_content = task.innerHTML
-    
+
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
             console.log(task_id)
@@ -250,7 +270,7 @@ function appendTask(e) {
             updateTasks(task_id, list_id, task_content)
         }, timeLength);
     })
-    
+
     newTask.addEventListener('keydown', () => {
         clearTimeout(typingTimer)
     });

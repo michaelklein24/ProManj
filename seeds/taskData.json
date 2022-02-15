@@ -1,13 +1,16 @@
 [
     {
+        "id": 1,
         "task_content": "task #1",
         "list_id": 1
     },
     {
+        "id": 2,
         "task_content": "task #2",
         "list_id": 2
     },
     {
+        "id": 3,
         "task_content": "task #3",
         "list_id": 3
     }
