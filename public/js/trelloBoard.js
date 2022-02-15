@@ -4,6 +4,11 @@ const trelloBoard = document.querySelectorAll('#trelloBoard')[0].children; //tar
 let addTaskButton = document.querySelectorAll('.addTaskButton') //targets all tasks buttons on page load
 let deleteListButton = document.querySelectorAll('#deleteListButton');
 let container = document.querySelectorAll('#trelloBoard')[0]
+let listTitle = document.querySelectorAll('.listTitle')
+
+const check = document.querySelector('.check');
+const fill = document.querySelector('.fill');
+const path = document.querySelector('.path');
 
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
@@ -13,41 +18,74 @@ const toggle = document.querySelector('#draggableToggle');  //targets toggle tha
 
 let draggedItem = null;
 
+let projectID = window.location.href.split('=').pop()
+
 //This will pull the highest id number for list/task and then any new list/task will be given an id after that to ensure no list/task is given the same id
-next_list_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
-next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute('data-task-id'))));
+// next_list_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
+// next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute('data-task-id'))));
 
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-const createTask = async (task_id, list_id) => {
-    let taskContent = 'Click to enter text';
+const getNextAvailableTaskId = async () => {
+    let response = await fetch('/api/task/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    let data = await response.json()
+    let nextTaskID = Math.max(...data.map(object => Number(object.id))) + 1
+    return nextTaskID
 
-    const response = await fetch(`api/trello/tasks/`, {
+}
+
+const getNextAvailableListId = async () => {
+    let response = await fetch('/api/list/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    let data = await response.json()
+    let nextListID = Math.max(...data.map(object => Number(object.id))) + 1
+    return nextListID
+}
+
+const newFunction = async () => {
+    const a = await getNextAvailableListId()
+    console.log(a)
+}
+const createTask = async (task_id, list_id) => {
+    let task_content = 'Click to enter text';
+
+    const response = await fetch(`api/task/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ task_id, list_id, taskContent })
+        body: JSON.stringify({ id: task_id, list_id: list_id, task_content: task_content })
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('task creation POST request has been sent to the server')
     } else {
         console.error(response)
     }
 }
 
-const createList = async (position_id, list_id) => {
-    let listContent = 'Click to enter text';
+const createList = async (position, list_id) => {
+    let list_content = 'Click to enter text';
 
-    const response = await fetch(`api/trello/lists`, {
+    const response = await fetch(`/api/list`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ position_id, list_id, listContent })
+        body: JSON.stringify({ id: list_id, position: position, list_content: list_content, project_id: projectID })
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list creation POST request has been sent to the server')
     } else {
         console.error(response)
@@ -55,58 +93,123 @@ const createList = async (position_id, list_id) => {
 }
 
 const deleteListColumn = async (list_id) => {
-    const response = await fetch(`api/trello/lists/${list_id}`, {
+    const response = await fetch(`/api/list/${list_id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
         },
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list deletion DELETE request has been sent to the server')
     } else {
         console.error(response)
     }
 }
 
+// THIS WORKS ON INSOMNIA BUT ISNT WORKING HERE...
 const updateLists = async (list_id, list_content, list_position) => {
-    const response = await fetch(`api/trello/lists/${list_id}`, {
+    const response = await fetch(`/api/list/${list_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: { list_content, list_position, },
+        body: JSON.stringify({ list_content: list_content, position: list_position }),
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list update PUT request has been sent to the server')
     } else {
         console.error(response)
     }
 }
 
+
 const updateTasks = async (task_id, list_id, task_content) => {
-    const response = await fetch(`api/trello/tasks/${task_id}`, {
+    const response = await fetch(`/api/task/${task_id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: { list_id, task_content },
+        body: JSON.stringify({ list_id: list_id, task_content: task_content }),
     })
     if (response.ok) {
         console.log('task update PUT request has been sent to the server')
+        addCheckMarkClasses()
     } else {
         console.error(response)
     }
 }
 
+// =================================================================================================================================================
+
+function addCheckMarkClasses() {
+    check.classList.add('check-complete', 'success');
+    fill.classList.add('fill-complete', 'success');
+    path.classList.add('path-complete');
+}
+
+addCheckMarkClasses()
+
+function removeCheckMarkClasses() {
+    check.classList.remove('check-complete', 'success');
+    fill.classList.remove('fill-complete', 'success');
+    path.classList.remove('path-complete');
+}
+
+let typingTimer
+let timeLength = 200;
+listTitle.forEach(title => title.addEventListener('keyup', (e) => {
+    let list = e.target.parentNode.parentNode;
+    let id = list.getAttribute('data-list-id');
+    let position = list.getAttribute('data-position');
+    let content = e.target.innerHTML
+    removeCheckMarkClasses()
+
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+        // console.log(id)
+        // console.log(content)
+        // console.log(position)
+        updateLists(id, content, position)
+    }, timeLength);
+}));
+
+listTitle.forEach(title => title.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+}));
+
+
+list_items.forEach(task => task.addEventListener('keyup', (e) => {
+    let task = e.target
+    let task_id = task.getAttribute('data-task-id')
+    let list_id = task.getAttribute('data-list-id')
+    let task_content = task.innerHTML
+    removeCheckMarkClasses()
+
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(() => {
+        console.log(task_id)
+        console.log(list_id)
+        console.log(task_content)
+        updateTasks(task_id, list_id, task_content)
+    }, timeLength);
+}))
+
+list_items.forEach(task => task.addEventListener('keydown', () => {
+    clearTimeout(typingTimer)
+}));
+
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
-const addList = () => {
-    next_list_id++;
+const addList = async () => {
+    removeCheckMarkClasses()
+    const nextAvailableListId = await getNextAvailableListId()
     next_position++;
 
     const newList = document.createElement('div');
     newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin-white.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2');
-    newList.setAttribute('data-list-id', next_list_id);
+    newList.setAttribute('data-list-id', nextAvailableListId);
     newList.setAttribute('data-position', next_position);
 
     if (toggle.checked == true) {
@@ -127,6 +230,28 @@ const addList = () => {
     newList.children[2].addEventListener('click', appendTask)
     newList.children[0].children[1].addEventListener('click', deleteList)
 
+    let newListTitle = newList.children[0].children[0]
+    newListTitle.addEventListener('keyup', (e) => {
+        let id = newList.getAttribute('data-list-id');
+        let position = newList.getAttribute('data-position');
+        let content = e.target.innerHTML
+        removeCheckMarkClasses()
+
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            console.log(id)
+            console.log(content)
+            console.log(position)
+            updateLists(id, content, position)
+        }, timeLength);
+    });
+
+    newListTitle.addEventListener('keydown', () => {
+        clearTimeout(typingTimer)
+    });
+
+
+
     // IF TOGGLE FOR DRAGGING LISTS IS ENABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     // IF TOGGLE FOR DRAGGING LISTS IS DISABLED THEN ADD DRAG EVENT LISTENER TO NEWLY ADDED LIST ELEMENT
     if (toggle.checked == false) {
@@ -135,11 +260,12 @@ const addList = () => {
         listDrag();
     }
 
-    createList(next_position, next_list_id)
+    createList(next_position, nextAvailableListId)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
 function deleteList(e) {
+    removeCheckMarkClasses()
     let id = e.target.parentNode.parentNode.getAttribute('data-list-id')
     e.target.parentNode.parentNode.remove()
 
@@ -147,8 +273,9 @@ function deleteList(e) {
 }
 
 
-function appendTask(e) {
-    next_task_id++ 
+async function appendTask(e) {
+    removeCheckMarkClasses()
+    let nextAvailableTaskID = await getNextAvailableTaskId()
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
     const newTask = document.createElement('div');
@@ -156,7 +283,7 @@ function appendTask(e) {
     newTask.classList.add('list-item')
     newTask.setAttribute('draggable', 'true');
     newTask.setAttribute('data-list-id', listID)
-    newTask.setAttribute('data-task-id', next_task_id)
+    newTask.setAttribute('data-task-id', nextAvailableTaskID)
 
     if (textToggle.checked == true) {
         newTask.setAttribute('contenteditable', 'false');
@@ -170,11 +297,34 @@ function appendTask(e) {
         newTask.setAttribute('draggable', 'false');
     }
 
+    newTask.addEventListener('keyup', (e) => {
+        let task = e.target
+        let task_id = task.getAttribute('data-task-id')
+        let list_id = task.getAttribute('data-list-id')
+        let task_content = task.innerHTML
+        removeCheckMarkClasses()
+
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            addCheckMarkClasses()
+            console.log(task_id)
+            console.log(list_id)
+            console.log(task_content)
+            updateTasks(task_id, list_id, task_content)
+        }, timeLength);
+    })
+
+    newTask.addEventListener('keydown', () => {
+        clearTimeout(typingTimer)
+    });
+
+
+
     e.target.previousElementSibling.appendChild(newTask);
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
-    createTask(next_task_id, listID)
+    createTask(nextAvailableTaskID, listID)
 }
 
 function makeDraggable() {
@@ -217,6 +367,7 @@ function makeDraggable() {
             })
             list.addEventListener('drop', function (e) {
                 // console.log(draggedItem)
+                removeCheckMarkClasses()
                 let list_id = this.getAttribute('data-list-id')
                 draggedItem.setAttribute('data-list-id', list_id)
                 this.children[1].appendChild(draggedItem);
@@ -252,6 +403,7 @@ function listDrag() {
                     // console.log(list_id)
                     // console.log(list_content)
                     // console.log(list_position)
+                    removeCheckMarkClasses()
                     updateLists(list_id, list_content, list_position)
                 }
             });
@@ -374,7 +526,6 @@ textToggle.addEventListener('click', () => {
         list_items.forEach(item => item.setAttribute('contenteditable', 'true'))
         lists.forEach(list => list.children[0].children[0].setAttribute('contenteditable', 'true'))
     }
-
 })
 
 

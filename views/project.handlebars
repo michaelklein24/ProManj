@@ -1,5 +1,6 @@
 <header class="d-flex justify-content-between container-fluid">
 
+
         <div class="d-flex gap-3 align-items-center">
             <a href="/users"><img src="./img/back-icon.png" id="homeIcon"></a>
             <div id="project-logo"></div>
@@ -21,26 +22,50 @@
                   <div id="messages" class="chat__messages"></div>  
                 
 
-                </div>
-                <form class="sendMessage d-flex justify-content-between gap-3">
-                  <input type="text" placeholder="type message here" class="messageInput">
-                  <input type="submit" value="send" class="submitMessage">
 
-                  <div id="locationDiv">
-                    <img src="./img/send-location.png" id="submitLocation">
-                  </div>
-                  </form>
+
             </div>
+
         
       
-         <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
+         //<div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
+
+            <form class="sendMessage d-flex justify-content-between gap-3">
+                <input type="text" placeholder="type message here" class="messageInput">
+                <input type="submit" value="send" class="submitMessage">
+
+                <div id="locationDiv">
+                    <img src="./img/send-location.png" id="submitLocation">
+                </div>
+            </form>
+        </div>
+
+
+        <div class="d-flex flex-column gap-4 flex-grow-1" id="trelloColumn">
+
             <div class="d-flex flex-column gap-3" id="trelloSection">
                 <div id='trelloTitleBar' class="d-flex justify-content-between align-items-center">
                     <h2 id="projectTitle">Food Locator</h2>
 
                     <div class="d-flex gap-3 align-items-center" id="trelloOptionsBar">
-                        {{!-- <h6 id=doubleClickInstructons class="bold text-end">double click text<br> to edit</h6>
-                        --}}
+
+                        <div class="checkmark">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" x="0px" y="0px"
+                                viewBox="0, 0, 100, 100" id="checkmark">
+                                <g transform="">
+                                    <circle class="path" fill="none" stroke="#7DB0D5" stroke-width="4"
+                                        stroke-miterlimit="10" cx="50" cy="50" r="44" />
+                                    <circle class="fill" fill="none" stroke="#7DB0D5" stroke-width="4"
+                                        stroke-miterlimit="10" cx="50" cy="50" r="44" />
+                                    <polyline class="check" fill="none" stroke="#7DB0D5" stroke-width="8"
+                                        stroke-linecap="round" stroke-miterlimit="10" points="70,35 45,65 30,52  " />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="vr"></div>
+
                         <div class="d-flex gap-2 align-items-center" id="dragTaskToggleDiv">
                             <div class="d-flex flex-column">
                                 <label id="moveableTasksH6" for="draggableToggle">moveable tasks</label>
@@ -71,17 +96,22 @@
                 <div id="trelloBoard" class="d-flex gap-3">
 
 
-                    <div class="list d-flex flex-column gap-2" data-list-id="1" data-position="0">
+
+
+                    {{!-- <div class="list d-flex flex-column gap-2" data-list-id="1" data-position="0">
                         <div class="d-flex justify-content-between align-items-center moveList">
                             <h3 class="text-white listTitle" contenteditable="true">To Do</h3>
                             <img src="./img/bin-white.png" id="deleteListButton">
                         </div>
                         <div class="taskList">
-                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="1" data-list-id="1">Add a
+                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="1"
+                                data-list-id="1">Add a
                                 README.md file</div>
-                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="2" data-list-id="1">List item 2
+                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="2"
+                                data-list-id="1">List item 2
                             </div>
-                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="3" data-list-id="1">List item 3
+                            <div class="list-item" draggable="true" contenteditable="true" data-task-id="3"
+                                data-list-id="1">List item 3
                             </div>
                         </div>
                         <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
@@ -93,15 +123,39 @@
                         </div>
                         <div class="taskList"></div>
                         <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
-                    </div>
+                    </div> --}}
 
-                   
+
+
+
+                    {{!-- {{#each}}
+                    <div class="list d-flex flex-column gap-2" data-list-id={{this.list_id}}
+                        data-position={{this.position}}>
+                        <div class="d-flex justify-content-between align-items-center moveList">
+                            <h3 class="text-white listTitle" contenteditable="true">{{this.list_content}}</h3>
+                            <img src="./img/bin-white.png" id="deleteListButton">
+                        </div>
+                        <div class="taskList">
+                            {{#each task}}
+                            <div class="list-item" draggable="true" contenteditable="true"
+                                data-task-id="{{this.task_id}}" data-list-id="{{this.list_id}}">{{this.task_content}}
+                            </div>
+                            {{/each}}
+                        </div>
+                        <h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>
+                    </div>
+                    {{/each}} --}}
+
+
+
+
+
                 </div>
             </div>
-          
-          
 
-      
+
+
+
             <div class="d-flex gap-4" id="memberOptionsRow">
                 <div id="membersSection" class="d-flex flex-column">
                     <h2>Members</h2>
@@ -121,14 +175,17 @@
             </div>
         </div>
 
-</div>
+    </div>
 
-        <!-- Logout and Update Profile Popup -->
-        <div id="profileOptions" class="d-flex flex-column p-4 gap-3 justify-content-around hideDisplay">
-            <h3 id="editProfileButton" class="text-center" data-bs-toggle="modal" data-bs-target="#editProfileModel">
-                Edit Profile</h3>
-            <h3 id="logoutButton" class="text-center">Logout</h3>
-        </div>
+    <!-- Logout and Update Profile Popup -->
+    <div id="profileOptions" class="d-flex flex-column p-4 gap-3 justify-content-around hideDisplay">
+        <h3 id="editProfileButton" class="text-center" data-bs-toggle="modal" data-bs-target="#editProfileModel">
+            Edit Profile</h3>
+        <h3 id="logoutButton" class="text-center">Logout</h3>
+    </div>
+
+    
+
 
         <!-- Modal for Inviting a member! -->
         <div class="modal fade" id="inviteMemberModal" tabindex="-1">
@@ -150,54 +207,51 @@
                     <input type="submit" id="inviteMemberButton" value="Create">
                 </form>
                     
+
+
+
+    <!-- Modal for removing self from project -->
+    <div class="modal fade" id="removeMemberModel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="d-flex flex-column gap-4 p-4 align-items-center">
+                    <h2 class="text-center bold">Are you sure?</h2>
+                    <h4 class="text-center">You will no longer have access to this workspace unless someone adds
+                        you again</h3>
+                        <h3 class="bold text-white text-center" id="removeMemberButton">I'm sure! Remove me from
+                            Project</h3>
+
                 </div>
+
             </div>
         </div>
+    </div>
 
-     
-    
-            <!-- Modal for removing self from project -->
-            <div class="modal fade" id="removeMemberModel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="d-flex flex-column gap-4 p-4 align-items-center">
-                            <h2 class="text-center bold">Are you sure?</h2>
-                            <h4 class="text-center">You will no longer have access to this workspace unless someone adds
-                                you again</h3>
-                                <h3 class="bold text-white text-center" id="removeMemberButton">I'm sure! Remove me from
-                                    Project</h3>
-                        </div>
-                       
+    <!-- Modal for updating Profile -->
+    <div class="modal fade" id="editProfileModel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form class="d-flex flex-column gap-4 p-4" id="updateProfile">
+                    <h2 class="text-center bold">Update your profile</h2>
+                    <div class="d-flex flex-column align-items-center gap-2">
+                        <input type="text" value="Michael" placeholder="Enter first name" id="updateFirstNameInput">
+                        <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
+                        <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
+                            id="updateEmailInput">
+                        <input type="password" placeholder="Enter your password" id="enterPasswordInput">
                     </div>
-                </div>
-            </div>
 
-            <!-- Modal for updating Profile -->
-            <div class="modal fade" id="editProfileModel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <form class="d-flex flex-column gap-4 p-4" id="updateProfile">
-                            <h2 class="text-center bold">Update your profile</h2>
-                            <div class="d-flex flex-column align-items-center gap-2">
-                                <input type="text" value="Michael" placeholder="Enter first name"
-                                    id="updateFirstNameInput">
-                                <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
-                                <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
-                                    id="updateEmailInput">
-                                <input type="password" placeholder="Enter your password" id="enterPasswordInput">
-                            </div>
+                    <input type="submit" id="updateProfileSubmit">
+                </form>
 
-                            <input type="submit" id="updateProfileSubmit">
-                        </form>
-                        
-                    </div>
-                </div>
             </div>
+        </div>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
 
 
@@ -206,16 +260,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+
     <script src="./js/collapsible.js"></script>
     <script src="./js/trelloBoard.js"></script>
     <script src="./js/profileOptions.js"></script>
     <script src="./js/updateProject.js"></script>
     <script src="js/logout.js"></script>
+
 <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
     <script src="./js/profileButtons.js"></script>
 
 
       
+

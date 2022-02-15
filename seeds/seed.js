@@ -1,17 +1,27 @@
 const sequelize = require("../config/connection");
-const { Project, User, usersToProjects } = require("../models");
+const { Project, User, usersToProjects, List, Task } = require("../models");
 
 const projectSeedData = require("./projectData.json");
 const userSeedData = require("./userData.json");
+const listSeedData = require("./ListData.json");
+const taskSeedData = require("./taskData.json");
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
+  
+
   const project = await Project.bulkCreate(projectSeedData);
 
   const user = await User.bulkCreate(userSeedData);
-
   
+  await List.bulkCreate(listSeedData);
+
+  await Task.bulkCreate(taskSeedData);
+
+
+
+
 
   // Create trips at random
   for (let i = 0; i < 10; i++) {
@@ -21,6 +31,10 @@ const seedDatabase = async () => {
 
     // Get a random location's `id`
     const { id: randomUserId } = user[Math.floor(Math.random() * user.length)];
+
+    // const { id: randomListId } = list[Math.floor(Math.random() * list.length)];
+
+    // const { id: randomTaskId } = task[Math.floor(Math.random() * task.length)];
 
     // Create a new trip with random `trip_budget` and `traveller_amount` values, but with ids selected above
     await usersToProjects
