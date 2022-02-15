@@ -36,18 +36,18 @@ router.get("/project", async (req, res) => {
   try {
    
    
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
-    })
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] },
+    //   include: [{ model: Project }],
+    // })
      
     
-    const user = userData.get({ plain: true });
-    console.log(user)
+    // const user = userData.get({ plain: true });
+    // console.log(user)
     
     
     res.render('project', {
-      ...user,
+      // ...user,
       logged_in: true,
     });
   } catch (err) {
