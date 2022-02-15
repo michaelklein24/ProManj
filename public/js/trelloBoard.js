@@ -6,6 +6,10 @@ let deleteListButton = document.querySelectorAll('#deleteListButton');
 let container = document.querySelectorAll('#trelloBoard')[0]
 let listTitle = document.querySelectorAll('.listTitle')
 
+const check = document.querySelector('.check');
+const fill = document.querySelector('.fill');
+const path = document.querySelector('.path');
+
 const movableTaskText = document.querySelector('#moveableTasksH6');
 const movableListText = document.querySelector('#moveableListsH6');
 
@@ -48,7 +52,7 @@ const getNextAvailableListId = async () => {
     return nextListID
 }
 
-const newFunction = async() => {
+const newFunction = async () => {
     const a = await getNextAvailableListId()
     console.log(a)
 }
@@ -63,6 +67,7 @@ const createTask = async (task_id, list_id) => {
         body: JSON.stringify({ id: task_id, list_id: list_id, task_content: task_content })
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('task creation POST request has been sent to the server')
     } else {
         console.error(response)
@@ -77,9 +82,10 @@ const createList = async (position, list_id) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id:list_id, position: position, list_content: list_content, project_id: projectID })
+        body: JSON.stringify({ id: list_id, position: position, list_content: list_content, project_id: projectID })
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list creation POST request has been sent to the server')
     } else {
         console.error(response)
@@ -94,6 +100,7 @@ const deleteListColumn = async (list_id) => {
         },
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list deletion DELETE request has been sent to the server')
     } else {
         console.error(response)
@@ -110,6 +117,7 @@ const updateLists = async (list_id, list_content, list_position) => {
         body: JSON.stringify({ list_content: list_content, position: list_position }),
     })
     if (response.ok) {
+        addCheckMarkClasses()
         console.log('list update PUT request has been sent to the server')
     } else {
         console.error(response)
@@ -127,12 +135,27 @@ const updateTasks = async (task_id, list_id, task_content) => {
     })
     if (response.ok) {
         console.log('task update PUT request has been sent to the server')
+        addCheckMarkClasses()
     } else {
         console.error(response)
     }
 }
 
 // =================================================================================================================================================
+
+function addCheckMarkClasses() {
+    check.classList.add('check-complete', 'success');
+    fill.classList.add('fill-complete', 'success');
+    path.classList.add('path-complete');
+}
+
+addCheckMarkClasses()
+
+function removeCheckMarkClasses() {
+    check.classList.remove('check-complete', 'success');
+    fill.classList.remove('fill-complete', 'success');
+    path.classList.remove('path-complete');
+}
 
 let typingTimer
 let timeLength = 200;
@@ -141,6 +164,7 @@ listTitle.forEach(title => title.addEventListener('keyup', (e) => {
     let id = list.getAttribute('data-list-id');
     let position = list.getAttribute('data-position');
     let content = e.target.innerHTML
+    removeCheckMarkClasses()
 
     clearTimeout(typingTimer);
     typingTimer = setTimeout(() => {
@@ -161,6 +185,7 @@ list_items.forEach(task => task.addEventListener('keyup', (e) => {
     let task_id = task.getAttribute('data-task-id')
     let list_id = task.getAttribute('data-list-id')
     let task_content = task.innerHTML
+    removeCheckMarkClasses()
 
     clearTimeout(typingTimer);
     typingTimer = setTimeout(() => {
@@ -176,7 +201,8 @@ list_items.forEach(task => task.addEventListener('keydown', () => {
 }));
 
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
-const addList = async() => {
+const addList = async () => {
+    removeCheckMarkClasses()
     const nextAvailableListId = await getNextAvailableListId()
     next_position++;
 
@@ -209,6 +235,7 @@ const addList = async() => {
         let id = newList.getAttribute('data-list-id');
         let position = newList.getAttribute('data-position');
         let content = e.target.innerHTML
+        removeCheckMarkClasses()
 
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
@@ -238,6 +265,7 @@ const addList = async() => {
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
 function deleteList(e) {
+    removeCheckMarkClasses()
     let id = e.target.parentNode.parentNode.getAttribute('data-list-id')
     e.target.parentNode.parentNode.remove()
 
@@ -246,6 +274,7 @@ function deleteList(e) {
 
 
 async function appendTask(e) {
+    removeCheckMarkClasses()
     let nextAvailableTaskID = await getNextAvailableTaskId()
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
@@ -273,9 +302,11 @@ async function appendTask(e) {
         let task_id = task.getAttribute('data-task-id')
         let list_id = task.getAttribute('data-list-id')
         let task_content = task.innerHTML
+        removeCheckMarkClasses()
 
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => {
+            addCheckMarkClasses()
             console.log(task_id)
             console.log(list_id)
             console.log(task_content)
@@ -336,6 +367,7 @@ function makeDraggable() {
             })
             list.addEventListener('drop', function (e) {
                 // console.log(draggedItem)
+                removeCheckMarkClasses()
                 let list_id = this.getAttribute('data-list-id')
                 draggedItem.setAttribute('data-list-id', list_id)
                 this.children[1].appendChild(draggedItem);
@@ -371,6 +403,7 @@ function listDrag() {
                     // console.log(list_id)
                     // console.log(list_content)
                     // console.log(list_position)
+                    removeCheckMarkClasses()
                     updateLists(list_id, list_content, list_position)
                 }
             });
