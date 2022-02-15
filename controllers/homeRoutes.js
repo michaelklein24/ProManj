@@ -1,66 +1,63 @@
 const router = require("express").Router();
-const {User,Project, usersToProjects } = require('../models');
+const { User, Project, usersToProjects } = require("../models");
 
 //add Project
 
 router.get("/", async (req, res) => {
-  res.render('homepage')
+  res.render("homepage");
 });
-
 
 router.get("/users", async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-      include: [{ model: Project}],
-    });
-
-
-    const user = userData.get({ plain: true });
-    const userProjects = user.projects
-    console.log(userProjects)
-    console.log(user)
-    res.render('projects-dashboard', {
-      user,
-      user_id: req.session.user_id,
-      logged_in: true
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-  
-
-});
-
-router.get("/project", async (req, res) => {
-  try {
-   
-   
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
+      attributes: { exclude: ["password"] },
       include: [{ model: Project }],
-    })
-     
-    
+    });
+
     const user = userData.get({ plain: true });
-    console.log(user)
+    const userProjects = user.projects;
+    const first = req.session.first_name.split("")[0];
     
     
-    res.render('project', {
-      ...user,
+    console.log(userProjects);
+    console.log(user);
+    res.render("projects-dashboard", {
+      user,
+      userName: req.session.first_name,
+      user_id: userProjects.id,
+      first,
+      
       logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
+router.get("/project", async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Project }],
+    });
 
+    const user = userData.get({ plain: true });
+    console.log(user);
+    const first = req.session.first_name.split("")[0];
+
+    res.render("project", {
+      ...user,
+      first,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get("/login", async (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/users');
+    res.redirect("/users");
     return;
   }
   res.render("login");
@@ -68,7 +65,7 @@ router.get("/login", async (req, res) => {
 
 router.get("/signup", async (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/users');
+    res.redirect("/users");
     return;
   }
   res.render("signup");

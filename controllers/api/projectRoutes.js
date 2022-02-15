@@ -2,12 +2,14 @@ const router = require('express').Router();
 const { User,Project, usersToProjects } = require('../../models');
 
 
+
 router.post('/', async (req, res) => {
     console.log(req.body)
     try {
       const newProject = await Project.create({
         ...req.body,
         projectId: req.session.userId,
+        
         
       
       });
@@ -36,6 +38,27 @@ console.log(projectData)
           res.status(400).json(err);
         }
       });
+
+      router.delete('/DTR', async(req, res)=>{
+        console.log(req.body.projectId)
+        console.log(req.session.user_id)
+        try {
+          const deleteRecord = await usersToProjects.destroy({
+          where: {
+            user_id: req.session.user_id,
+            project_id:req.body.projectId
+          }
+        })
+
+        res.status(200).json(deleteRecord);
+          
+        } catch (err) {
+          res.status(400).json(err);
+        }
+        
+
+        
+      })
   
   
 

@@ -14,7 +14,7 @@ const loginFormHandler = async (event) => {
   console.log(response)
       if (response.ok) {
       
-        document.location.replace('/users');
+        document.location.replace(`/users`);
       } else {
         alert('Failed to log in.');
         document.querySelector('#emailInput').value = ''
