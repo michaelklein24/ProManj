@@ -23,13 +23,6 @@ Project.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    list_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'list',
-        key: 'id',
-      }
-    }
   },
   {
     sequelize,

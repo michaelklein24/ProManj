@@ -15,6 +15,14 @@ Task.init(
             type:DataTypes.STRING,
             allowNull: true,
         },
+        list_id: {
+            type:DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'list',
+                key: 'id'
+            }
+        }
     },
   {
         sequelize,

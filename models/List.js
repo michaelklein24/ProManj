@@ -15,10 +15,14 @@ List.init(
             type:DataTypes.STRING,
             allowNull: true,
         },
-        task_id: {
+        position: {
+            type:DataTypes.INTEGER,
+            allowNull: false,
+        },
+        project_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'task',
+                model: 'project',
                 key: 'id',
             },
         },

@@ -9,13 +9,15 @@ const taskSeedData = require("./taskData.json");
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  await Task.bulkCreate(taskSeedData);
-
-  await List.bulkCreate(listSeedData);
+  
 
   const project = await Project.bulkCreate(projectSeedData);
 
   const user = await User.bulkCreate(userSeedData);
+  
+  await List.bulkCreate(listSeedData);
+
+  await Task.bulkCreate(taskSeedData);
 
 
 
