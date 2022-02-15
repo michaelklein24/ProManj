@@ -14,9 +14,11 @@ const toggle = document.querySelector('#draggableToggle');  //targets toggle tha
 
 let draggedItem = null;
 
+let projectID = window.location.href.split('=').pop()
+
 //This will pull the highest id number for list/task and then any new list/task will be given an id after that to ensure no list/task is given the same id
-next_list_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
-next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute('data-task-id'))));
+// next_list_id = Math.max(...[...lists].map(list => Number(list.getAttribute('data-list-id'))));
+// next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute('data-task-id'))));
 
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
@@ -75,7 +77,7 @@ const createList = async (position, list_id) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id:list_id, position: position, list_content: list_content, project_id: 1 })
+        body: JSON.stringify({ id:list_id, position: position, list_content: list_content, project_id: projectID })
     })
     if (response.ok) {
         console.log('list creation POST request has been sent to the server')
@@ -133,7 +135,7 @@ const updateTasks = async (task_id, list_id, task_content) => {
 // =================================================================================================================================================
 
 let typingTimer
-let timeLength = 1000;
+let timeLength = 200;
 listTitle.forEach(title => title.addEventListener('keyup', (e) => {
     let list = e.target.parentNode.parentNode;
     let id = list.getAttribute('data-list-id');
@@ -244,7 +246,6 @@ function deleteList(e) {
 
 
 async function appendTask(e) {
-    // next_task_id++
     let nextAvailableTaskID = await getNextAvailableTaskId()
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
