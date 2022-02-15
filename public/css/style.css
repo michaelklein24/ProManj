@@ -662,6 +662,13 @@ main {
 #editProfileButton:hover {
     background-color: #313fbe;
 }
+
+#viewButton{
+    background-color: #4356FF;
+}
+#viewButton:hover {
+    background-color: #313fbe;
+}
 #logoutButton {
     background-color: #FF2222;
 }
@@ -741,6 +748,20 @@ main {
     background-color: #d8d4d47e;
 }
 #addprojectName{
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color: #d8d4d47e;
+}
+
+#addingprojectName{
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color: #d8d4d47e;
+}
+
+#memberName{
     border: none;
     border-radius: 4px;
     padding: 6px 10px;
