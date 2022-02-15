@@ -1,10 +1,11 @@
 const sequelize = require("../config/connection");
-const { Project, User, usersToProjects, List, Task } = require("../models");
+const { Project, User, usersToProjects, List, Task, Note } = require("../models");
 
 const projectSeedData = require("./projectData.json");
 const userSeedData = require("./userData.json");
 const listSeedData = require("./ListData.json");
 const taskSeedData = require("./taskData.json");
+const noteSeedData = require("./noteData.json");
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -19,7 +20,7 @@ const seedDatabase = async () => {
 
   await Task.bulkCreate(taskSeedData);
 
-
+  await Note.bulkCreate(noteSeedData)
 
 
 

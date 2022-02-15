@@ -3,6 +3,7 @@ const Project = require('./Project');
 const usersToProjects = require('./usersToProjects');
 const List = require('./List');
 const Task = require('./Task');
+const Note = require('./Note')
 
 Project.belongsToMany(User, {
 
@@ -43,7 +44,16 @@ List.hasMany(Task, {
   foreignKey: 'list_id',
 })
 
-module.exports = { User, Project, usersToProjects, List, Task };
+Note.belongsTo(User, {
+  foreignKey: 'user_id'
+})
+
+User.hasMany(Note, {
+  foreignKey: 'user_id',
+  onDelete:'CASCADE'
+})
+
+module.exports = { User, Project, usersToProjects, List, Task, Note };
 
 
 
