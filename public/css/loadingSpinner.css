@@ -3,6 +3,11 @@
     margin: 0 auto;
   }
   
+.checkmark1 {
+  width: 32px;
+  margin: 0 auto;
+}
+
   .path {
     stroke-dasharray: 300;
     stroke-dashoffset: 0;

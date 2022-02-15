@@ -25,6 +25,8 @@ router.get("/users", async (req, res) => {
       user,
       userName: req.session.first_name,
       user_id: userProjects.id,
+      userid: req.session.user_id,
+  
       first,
       
       logged_in: true,
