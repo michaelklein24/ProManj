@@ -43,20 +43,20 @@
                 <div class="d-flex flex-column gap-3" id="messagesList">
                     
               
-                {{!-- INDIVIDUAL NOTE -- {{EACH NOTES as |NOTE|--}}
+                {{#each notes}}
                 <div class="d-flex flex-column">
-                    <div class="d-flex justify-content-between align-items-center messageListing collapsible" data-note-id="1">
-                        <h3 class="messageContact collapsible" contenteditable='true'>Need to do</h3>
+                    <div class="d-flex justify-content-between align-items-center messageListing collapsible" data-note-id="{{this.id}}">
+                        <h3 class="messageContact collapsible" contenteditable='true'>{{this.note_title}}</h3>
                         <div class="d-flex gap-3">
                             <img id='deleteNoteButton' src="/img/bin.png">
 
                         </div>
                     </div>
                     <div class="noteContent">
-                        <h3 contenteditable='true' id="note_body">Note content here</h3>
+                        <h3 contenteditable='true' id="note_body">{{this.note_content}}</h3>
                     </div>
                 </div>
-                {{!-- INDIVIDUAL NOTE -- {{/EACH}} --}}
+                {{/each}}
 
             </div>
         </div>
