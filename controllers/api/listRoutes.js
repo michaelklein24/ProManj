@@ -12,19 +12,6 @@ list.get('/', async (req, res) => {
     }
 })
 
-// list.get('/:id', async (req, res) => {
-//     try {
-//         const listData = await List.findByPk(req.params.id, {})
-//         if (!listData) {
-//             res.status(404).json(listData)
-//         } else {
-//             res.status(200).json(listData)
-//         }
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// })
-
 list.post('/', async (req, res) => {
     // "list_content":"hello",
     // "position":1,

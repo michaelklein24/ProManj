@@ -1,15 +1,18 @@
 [
     {
+        "id":1,
         "list_content": "list #1",
         "position": 0,
         "project_id": 1
     },
     {
+        "id":2,
         "list_content": "list #2",
         "position": 0,
         "project_id": 2
     },
     {
+        "id":3,
         "list_content": "list #3",
         "position": 0,
         "project_id": 3

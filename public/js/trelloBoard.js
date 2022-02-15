@@ -21,21 +21,35 @@ next_task_id = Math.max(...[...list_items].map(item => Number(item.getAttribute(
 //This will give the list the next available position number
 next_position = [...lists].length - 1;
 
-// const getNextAvailableTaskId = async () => {
-//     let response = await fetch('/api/task/', {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//     })
-//     let data = await response.json()
-//     console.log(data)
-//     return Math.max(...data.map(object => Number(object.id)))
-    
-// }
-// console.log(getNextAvailableTaskId().then(highestTaskId => {return highestTaskId}))
+const getNextAvailableTaskId = async () => {
+    let response = await fetch('/api/task/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    let data = await response.json()
+    let nextTaskID = Math.max(...data.map(object => Number(object.id))) + 1
+    return nextTaskID
 
+}
 
+const getNextAvailableListId = async () => {
+    let response = await fetch('/api/list/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    let data = await response.json()
+    let nextListID = Math.max(...data.map(object => Number(object.id))) + 1
+    return nextListID
+}
+
+const newFunction = async() => {
+    const a = await getNextAvailableListId()
+    console.log(a)
+}
 const createTask = async (task_id, list_id) => {
     let task_content = 'Click to enter text';
 
@@ -44,7 +58,7 @@ const createTask = async (task_id, list_id) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ list_id: list_id, task_content: task_content })
+        body: JSON.stringify({ id: task_id, list_id: list_id, task_content: task_content })
     })
     if (response.ok) {
         console.log('task creation POST request has been sent to the server')
@@ -53,15 +67,15 @@ const createTask = async (task_id, list_id) => {
     }
 }
 
-const createList = async (position, list_id, project_id) => {
+const createList = async (position, list_id) => {
     let list_content = 'Click to enter text';
 
-    const response = await fetch(`/api//list`, {
+    const response = await fetch(`/api/list`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ position:position, list_content:list_content, project_id:project_id })
+        body: JSON.stringify({ id:list_id, position: position, list_content: list_content, project_id: 1 })
     })
     if (response.ok) {
         console.log('list creation POST request has been sent to the server')
@@ -91,7 +105,7 @@ const updateLists = async (list_id, list_content, list_position) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ list_content:list_content, position:list_position }),
+        body: JSON.stringify({ list_content: list_content, position: list_position }),
     })
     if (response.ok) {
         console.log('list update PUT request has been sent to the server')
@@ -107,7 +121,7 @@ const updateTasks = async (task_id, list_id, task_content) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ list_id:list_id, task_content:task_content }),
+        body: JSON.stringify({ list_id: list_id, task_content: task_content }),
     })
     if (response.ok) {
         console.log('task update PUT request has been sent to the server')
@@ -115,9 +129,6 @@ const updateTasks = async (task_id, list_id, task_content) => {
         console.error(response)
     }
 }
-
-updateTasks(1, 2, 'test')
-
 
 // =================================================================================================================================================
 
@@ -162,16 +173,15 @@ list_items.forEach(task => task.addEventListener('keydown', () => {
     clearTimeout(typingTimer)
 }));
 
-
 // USER CLICKS ADD NEW LIST AND A NEW LIST APPENDS TO PAGE
-const addList = () => {
-    next_list_id++;
+const addList = async() => {
+    const nextAvailableListId = await getNextAvailableListId()
     next_position++;
 
     const newList = document.createElement('div');
     newList.innerHTML = `<div class="d-flex justify-content-between align-items-center moveList"><h3 class="text-white listTitle">Click to edit</h3><img src="./img/bin-white.png" id="deleteListButton"></div><div class="taskList"></div><h5 class="text-white addTaskButton"><span class="bold">+</span> Add task</h5>`
     newList.classList.add('list', 'd-flex', 'flex-column', 'gap-2');
-    newList.setAttribute('data-list-id', next_list_id);
+    newList.setAttribute('data-list-id', nextAvailableListId);
     newList.setAttribute('data-position', next_position);
 
     if (toggle.checked == true) {
@@ -221,7 +231,7 @@ const addList = () => {
         listDrag();
     }
 
-    createList(next_position, next_list_id)
+    createList(next_position, nextAvailableListId)
 }
 
 // RESPONSIBLE FOR DELETE LIST COLUMN
@@ -233,8 +243,9 @@ function deleteList(e) {
 }
 
 
-function appendTask(e) {
-    next_task_id++
+async function appendTask(e) {
+    // next_task_id++
+    let nextAvailableTaskID = await getNextAvailableTaskId()
     let listID = e.target.parentNode.getAttribute('data-list-id')
 
     const newTask = document.createElement('div');
@@ -242,7 +253,7 @@ function appendTask(e) {
     newTask.classList.add('list-item')
     newTask.setAttribute('draggable', 'true');
     newTask.setAttribute('data-list-id', listID)
-    newTask.setAttribute('data-task-id', next_task_id)
+    newTask.setAttribute('data-task-id', nextAvailableTaskID)
 
     if (textToggle.checked == true) {
         newTask.setAttribute('contenteditable', 'false');
@@ -281,7 +292,7 @@ function appendTask(e) {
 
     // ENSURES THAT NEW TASK ITEM GETS THE APPROPRIATE EVEN LISTENER
     makeDraggable();
-    createTask(next_task_id, listID)
+    createTask(nextAvailableTaskID, listID)
 }
 
 function makeDraggable() {
