@@ -8,12 +8,14 @@ const addEmailButton = document.querySelector('#addEmailButton');
 // Contains all emails that will have access to new project
 const emails = []
 
-addEmailButton.addEventListener('click', () => {
-    let email = projectEmailInput.value.trim();
-    emails.push(email)
-    console.log(emails)
-    appendEmails()
-})
+// console.log(addEmailButton)
+
+// addEmailButton.addEventListener('click', () => {
+//     let email = projectEmailInput.value.trim();
+//     emails.push(email)
+//     console.log(emails)
+//     appendEmails()
+// })
 
 function appendEmails() {
     const insertEmailSection = document.querySelectorAll('#emailList');
