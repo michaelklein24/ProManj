@@ -97,6 +97,14 @@ header {
     width: auto;
 }
 
+.arrow-logo {
+background-color: var(--grey);
+padding: 10px;
+border-radius: 6px;
+height: 59px;
+width: 59px;
+}
+
 main {
     height: 89.6vh;
     background-image: linear-gradient(#A8D0E6, #374785);
@@ -242,11 +250,16 @@ main {
 }
 
 #profileCircle {
-    padding: 1vh;
-    background-color: #24305E;
     border-radius: 360px;
+    width:30px;
+    height:30px;
     color:white;
     cursor: pointer;
+    transition: .3s;
+}
+
+#profileCircle:hover {
+    transform: rotate(45deg);
 }
 
 #bg-color-projects-dashboard {

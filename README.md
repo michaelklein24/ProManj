@@ -2,8 +2,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
-
-
 ## Table of Contents
 - [Description](#Description)
 - [Links](#Links)
@@ -19,8 +17,10 @@
 
 ## Description
 
+**KeepUP** is a full stack application that provides teams with a platform that makes communication easy!  Chat with others, manage your projects, create notes, and more with **KeepUP**.
+
 ## Links
-[URL to deployed application]()
+[URL to deployed application]( https://keepup-project-management.herokuapp.com/)
 [URL to GitHub repository](https://github.com/inklein1997/ProManj)
 
 ## Technologies
