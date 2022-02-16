@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Project, usersToProjects } = require("../models");
+const { User, Project, usersToProjects, Note } = require("../models");
 
 //add Project
 
@@ -17,16 +17,24 @@ router.get("/users", async (req, res) => {
     const user = userData.get({ plain: true });
     const userProjects = user.projects;
     const first = req.session.first_name.split("")[0];
-    
-    
+
+    const noteData = await Note.findAll({
+      where: {
+        user_id: req.session.user_id
+      }
+    })
+    const notes = noteData.map(note => note.get({ plain: true }))
+
     console.log(userProjects);
     console.log(user);
     res.render("projects-dashboard", {
       user,
       userName: req.session.first_name,
       user_id: userProjects.id,
+      userid: req.session.user_id,
+  
       first,
-      
+      notes,
       logged_in: true,
     });
   } catch (err) {
