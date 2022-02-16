@@ -603,6 +603,7 @@ main {
     padding: 5px;
     border: 1px solid;
     border-radius: 360px;
+    background-color:green;
 }
 
 /* INVITE MEMBER MODAL */
@@ -753,6 +754,24 @@ main {
     padding: 6px 10px;
     background-color: #d8d4d47e;
 }
+.message {
+    margin-bottom: 16px;   
+}
+
+.message__name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.message__meta {
+    color: #777;
+    font-size: 14px;
+}
+
+.message a {
+    color: #0070CC;
+}
 
 #addingprojectName{
     border: none;
@@ -824,6 +843,7 @@ main {
 #addMemberSubmit:hover {
     background-color: #3a4eb3;
 }
+
 
 @media screen and (max-width:1200px) {
     #bg-color-projects-dashboard {

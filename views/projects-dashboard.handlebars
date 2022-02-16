@@ -64,7 +64,7 @@
 
             <div class="d-flex flex-column gap-4 flex-grow-1">
                 <div class="d-flex flex-column" id="YourWorkspacesSection">
-                    <h2 id="workspaceSectionTitle">YOUR WORKSPACES{{user.projects.[0].id}}</h2>
+                    <h2 id="workspaceSectionTitle">YOUR WORKSPACES</h2>
                     <hr>
 
 
@@ -106,11 +106,10 @@
                 <form class="d-flex flex-column gap-4 p-4" id="updateProfile">
                     <h2 class="text-center bold">Update your profile</h2>
                     <div class="d-flex flex-column align-items-center gap-2">
-                        <input type="text" value="Michael" placeholder="Enter first name" id="updateFirstNameInput">
-                        <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
-                        <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
+                        <input type="text"  placeholder="Enter first name" id="updateFirstNameInput">
+                        <input type="text"  placeholder="Enter last name" id="updateLastNameInput">
+                        <input type="text"  placeholder="Enter email"
                             id="updateEmailInput">
-                        <input type="password" placeholder="Enter your password" id="enterPasswordInput">
                     </div>
 
                     <input type="submit" id="updateProfileSubmit">
@@ -173,14 +172,17 @@
             </div>
         </div>
     </div> 
-<script src="js/collapsible.js"></script>
-    <script src="./js/profileOptions.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+    <script src="js/collapsible.js"></script>
+    <script src="./js/profileOptions.js"></script>
     <script src="./js/createUsertoProject.js"></script>
 
     <script src="./js/createProject.js"></script>
-{{!-- <script src="./js/updateProfile.js"></script> --}}
+<script src="./js/updateProfile.js"></script>
     <script src="js/notes.js"></script>
     <script src="js/logout.js"></script>
+    
+

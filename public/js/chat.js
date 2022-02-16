@@ -17,6 +17,7 @@ const $nameBar = document.querySelector('#membersList')
 const { room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+  
 
 const autoscroll = () => {
   //New message element
@@ -74,21 +75,29 @@ const username = message.username
 });
 
 socket.on('roomData', ({room, users})=>{
-  const source =`<div class="d-flex gap-2 align-items-center">
-  <div class="onlineDot"></div>
-  <h4 class="memberName">{{users}}</h4>
-</div>`
-const name = users[0].username
-
-const renderHtml = {
-  room,
-  users: name[0].toUpperCase()+ name.substring(1)
-};
-console.log(users[0].username)
-console.log(room)
-const html = Handlebars.compile(source);
-const result = html(renderHtml);
-$nameBar.innerHTML = result
+  console.log(users)
+  users.forEach((user)=>{
+    const source =`<div class="d-flex gap-2 align-items-center">
+    
+    <div class="onlineDot"></div>
+    <h4 class="memberName">{{theUsers}}</h4>
+    
+  </div>`
+  const name = user.username
+  console.log(user)
+  console.log(name)
+  
+  const renderHtml = {
+    room,
+    theUsers: name[0].toUpperCase()+ name.substring(1)
+  };
+  console.log(user.username)
+  console.log(room)
+  const html = Handlebars.compile(source);
+  const result = html(renderHtml);
+  $nameBar.innerHTML = result
+  })
+ 
 })
 
 socket.on("locationMessage", (message) => {
@@ -168,3 +177,4 @@ socket.emit("join", { username, room }, (error) => {
     location.href = "/";
   }
 });
+

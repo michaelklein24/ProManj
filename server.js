@@ -54,7 +54,7 @@ io.on("connection", (socket) => {
 
   socket.on("join", ({ username, room }, callback) => {
     const { error, user } = addUser({ id: socket.id, username, room });
-
+      
     if (error) {
       return callback(error);
     }

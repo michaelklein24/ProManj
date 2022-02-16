@@ -51,4 +51,7 @@ const removeProject = async(e)=>{
     }
     console.log('hey')
 }
+
+
 $removeButton.addEventListener('click', removeProject)
+
