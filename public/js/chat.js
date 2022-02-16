@@ -74,31 +74,31 @@ const username = message.username
   
 });
 
-socket.on('roomData', ({room, users})=>{
-  console.log(users)
-  users.forEach((user)=>{
-    const source =`<div class="d-flex gap-2 align-items-center">
+// socket.on('roomData', ({room, users})=>{
+//   console.log(users)
+//   users.forEach((user)=>{
+//     const source =`<div class="d-flex gap-2 align-items-center">
     
-    <div class="onlineDot"></div>
-    <h4 class="memberName">{{theUsers}}</h4>
+//     <div class="onlineDot"></div>
+//     <h4 class="memberName">{{theUsers}}</h4>
     
-  </div>`
-  const name = user.username
-  console.log(user)
-  console.log(name)
+//   </div>`
+//   const name = user.username
+//   console.log(user)
+//   console.log(name)
   
-  const renderHtml = {
-    room,
-    theUsers: name[0].toUpperCase()+ name.substring(1)
-  };
-  console.log(user.username)
-  console.log(room)
-  const html = Handlebars.compile(source);
-  const result = html(renderHtml);
-  $nameBar.innerHTML = result
-  })
+//   const renderHtml = {
+//     room,
+//     theUsers: name[0].toUpperCase()+ name.substring(1)
+//   };
+//   console.log(user.username)
+//   console.log(room)
+//   const html = Handlebars.compile(source);
+//   const result = html(renderHtml);
+//   $nameBar.innerHTML = result
+//   })
  
-})
+// })
 
 socket.on("locationMessage", (message) => {
   console.log(message)

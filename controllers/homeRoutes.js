@@ -1,7 +1,13 @@
 const router = require("express").Router();
 
-const { User, Project, usersToProjects, List, Task } = require("../models");
-
+const {
+  User,
+  Project,
+  usersToProjects,
+  List,
+  Task,
+  Note,
+} = require("../models");
 
 //add Project
 
@@ -20,14 +26,12 @@ router.get("/users", async (req, res) => {
     const userProjects = user.projects;
     const first = req.session.first_name.split("")[0];
 
-
     const noteData = await Note.findAll({
       where: {
-        user_id: req.session.user_id
-      }
-    })
-    const notes = noteData.map(note => note.get({ plain: true }))
-
+        user_id: req.session.user_id,
+      },
+    });
+    const notes = noteData.map((note) => note.get({ plain: true }));
 
     console.log(userProjects);
     console.log(user);
@@ -36,7 +40,7 @@ router.get("/users", async (req, res) => {
       userName: req.session.first_name,
       user_id: userProjects.id,
       userid: req.session.user_id,
-  
+
       first,
 
       notes,
@@ -58,34 +62,37 @@ router.get("/project", async (req, res) => {
       include: [{ model: Project }],
     });
 
-  
-
     const listData = await List.findAll({
       where: { project_id: num },
       include: [{ model: Task }],
       order: [["position", "ASC"]],
     });
 
-    const taskData = await Task.findAll({ where: { list_id: 7 } });
+    // const taskData = await Task.findAll({ where: { list_id: 7 } });
 
     const user = userData.get({ plain: true });
-    
-
 
     const lists = listData.map((list) => list.get({ plain: true }));
-    const tasks = taskData.map((task) => task.get({ plain: true }));
-    console.log(usertopro)
+    // const tasks = taskData.map((task) => task.get({ plain: true }));
+
     console.log(lists);
     console.log(user);
-    console.log(tasks);
+    const project = user.projects
+    const title = project.find((pro)=>{
+      console.log(pro)
+      
+     return pro.id === parseInt(num)
+     
+    })
+    console.log(title)
+console.log(project)
     const first = req.session.first_name.split("")[0];
 
     res.render("project", {
-      tasks,
       lists,
       ...user,
       first,
-
+      title,
       logged_in: true,
     });
   } catch (err) {
