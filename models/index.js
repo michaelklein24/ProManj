@@ -1,36 +1,59 @@
 const User = require('./User');
 const Project = require('./Project');
+const usersToProjects = require('./usersToProjects');
+const List = require('./List');
+const Task = require('./Task');
+const Note = require('./Note')
 
-User.hasMany(Project, {
-  foreignKey: 'user_id',
+Project.belongsToMany(User, {
+
+  through: {
+    model: usersToProjects,
+    unique: false
+  },
+  constraints: false
+
+});
+
+User.belongsToMany(Project, {
+
+  through: {
+    model: usersToProjects,
+    unique: false
+  },
+
+});
+
+List.belongsTo(Project, {
+  constraint: false,
+  foreignKey: 'project_id',
   onDelete: 'CASCADE'
 });
 
-Project.belongsTo(User, {
-  foreignKey: 'user_id'
+Project.hasMany(List, {
+  foreignKey: 'project_id',
 });
 
-module.exports = { User, Project };
+Task.belongsTo(List, {
+  constraint: false,
+  foreignKey: 'list_id',
+  onDelete: 'CASCADE'
+});
+
+List.hasMany(Task, {
+  foreignKey: 'list_id',
+})
+
+Note.belongsTo(User, {
+  foreignKey: 'user_id'
+})
+
+User.hasMany(Note, {
+  foreignKey: 'user_id',
+  onDelete:'CASCADE'
+})
+
+module.exports = { User, Project, usersToProjects, List, Task, Note };
 
 
-//need to add projects to many users
 
-// Traveller.belongsToMany(Location, {
-//     // Define the third table needed to store the foreign keys
-//     through: {
-//       model: Trip,
-//       unique: false
-//     },
-//     // Define an alias for when data is retrieved
-//     as: 'planned_trips'
-//   });
-  
-//   Location.belongsToMany(Traveller, {
-//     // Define the third table needed to store the foreign keys
-//     through: {
-//       model: Trip,
-//       unique: false
-//     },
-//     // Define an alias for when data is retrieved
-//     as: 'location_travellers'
-//   });

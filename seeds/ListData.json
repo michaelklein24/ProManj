@@ -1,0 +1,56 @@
+[
+    {
+        "id":1,
+        "list_content": "To Do",
+        "position": 0,
+        "project_id": 1
+    },
+    {
+        "id":2,
+        "list_content": "In progress",
+        "position": 1,
+        "project_id": 1
+    },
+    {
+        "id":3,
+        "list_content": "Completed",
+        "position": 2,
+        "project_id": 1
+    },
+    {
+        "id":4,
+        "list_content": "To Do",
+        "position": 0,
+        "project_id": 2
+    },
+    {
+        "id":5,
+        "list_content": "In progress",
+        "position": 1,
+        "project_id": 2
+    },
+    {
+        "id":6,
+        "list_content": "Completed",
+        "position": 2,
+        "project_id": 2
+    },
+    {
+        "id":7,
+        "list_content": "To Do",
+        "position": 0,
+        "project_id": 3
+    },
+    {
+        "id":8,
+        "list_content": "In progress",
+        "position": 1,
+        "project_id": 3
+    },
+    {
+        "id":9,
+        "list_content": "Completed",
+        "position": 2,
+        "project_id": 3
+    }
+]

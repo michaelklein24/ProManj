@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+/* *:hover {
+  cursor:default
+} */
+
 html {
   height: 100%;
 }

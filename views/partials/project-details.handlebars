@@ -1,0 +1,11 @@
+<div class="projectItemCustom d-flex flex-column gap-3">
+    <a href="/project?room={{this.id}}">
+        <div class="d-flex align-items-end gap-3">
+            <h3 id="projectTitle">{{this.name}}</h3>
+        </div>
+        <div>
+            <h4 id="projectDetails"><span class="bold">Description: </span><span>{{this.description}}</span></h4>
+            <h4 id="projectDetails"><span class="bold">Date Created: </span><span>{{format_date this.date_created}}</span></h4>
+        </div>
+    </a>
+</div>

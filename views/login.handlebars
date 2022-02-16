@@ -1,0 +1,26 @@
+<header class="d-flex justify-content-between container-fluid">
+        <div class="d-flex gap-3 align-items-center">
+            <img class='arrow-logo'src="/img/arrow-logo.png">
+            <h1 id="projectName">ProManj</h1>
+        </div>
+       {{>loginSignup}}
+    </header>
+    <main>
+        <div class="d-flex flex-column gap-4" id="loginBlock">
+            <h3 class="text-center fs-5">Log in to ProManj</h3>
+            <form class="d-flex flex-column gap-3" id="login-form">
+                <input type="text" placeholder="Enter email" id="emailInput">
+                <input type="password" placeholder="Enter password" id="passwordInput">
+                <input type="submit" value="Login" id="submitLogin">
+            </form>
+            <p class="text-center my-0">OR</p>
+            <div class="d-flex flex-column gap-2">
+                <div class="futureLogin"></div>
+                <div class="futureLogin"></div>
+                <div class="futureLogin"></div>
+            </div>
+            <hr>
+            <h4 id="cantLogIn">Can't log in? <span id="loginBtn">Sign up here</span></h4>
+        </div>
+    </main>
+    <script src="js/login.js"></script>
