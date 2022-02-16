@@ -8,7 +8,9 @@
         </div>
         <div class="d-flex gap-3 align-items-center align-self-center" id="loginSignUpBtns">
             <h2 id="helloText">Hello {{first_name}}</h2>
-            <div id="profileCircle">{{first}}</div>
+            {{!-- <div id="profileCircle">{{first}}</div> --}}
+            <img src="img/gear.png" id="profileCircle">
+ 
         </div>
     </header>
     <main>
@@ -142,22 +144,6 @@
                                 <div class="onlineDot"></div>
                                 <h4 class="memberName">Romeo Dixon</h4>
                             </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="onlineDot"></div>
-                                <h4 class="memberName">Leah Nelson</h4>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="onlineDot"></div>
-                                <h4 class="memberName">Sam Prince</h4>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="onlineDot"></div>
-                                <h4 class="memberName">Morgan TA</h4>
-                            </div>
-                            <div class="d-flex gap-2 align-items-center">
-                                <div class="onlineDot"></div>
-                                <h4 class="memberName">Leah Nelson</h4>
-                            </div>
                         </div>
                 </div>
                 <div id="memberManagement" class="text-center d-flex flex-column justify-content-around">
@@ -236,7 +222,7 @@
                         <input type="text" value="Klein" placeholder="Enter last name" id="updateLastNameInput">
                         <input type="text" value="michaelklein1997@gmail.com" placeholder="Enter email"
                             id="updateEmailInput">
-                        <input type="password" placeholder="Enter your password" id="enterPasswordInput">
+                        {{!-- <input type="password" placeholder="Enter your password" id="enterPasswordInput"> --}}
                     </div>
 
                     <input type="submit" id="updateProfileSubmit">
