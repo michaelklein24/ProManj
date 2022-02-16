@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Project, usersToProjects } = require("../models");
+const { User, Project, usersToProjects, List, Task } = require("../models");
 
 //add Project
 
@@ -17,8 +17,7 @@ router.get("/users", async (req, res) => {
     const user = userData.get({ plain: true });
     const userProjects = user.projects;
     const first = req.session.first_name.split("")[0];
-    
-    
+
     console.log(userProjects);
     console.log(user);
     res.render("projects-dashboard", {
@@ -26,7 +25,7 @@ router.get("/users", async (req, res) => {
       userName: req.session.first_name,
       user_id: userProjects.id,
       first,
-      
+
       logged_in: true,
     });
   } catch (err) {
@@ -35,18 +34,40 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/project", async (req, res) => {
+  console.log(req.originalUrl);
+  const num = req.originalUrl.split("=")[1];
+  console.log(num);
   try {
-
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
       include: [{ model: Project }],
     });
 
+  
+
+    const listData = await List.findAll({
+      where: { project_id: num },
+      include: [{ model: Task }],
+      order: [["position", "ASC"]],
+    });
+
+    const taskData = await Task.findAll({ where: { list_id: 7 } });
+
     const user = userData.get({ plain: true });
+    
+
+
+    const lists = listData.map((list) => list.get({ plain: true }));
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+    console.log(usertopro)
+    console.log(lists);
     console.log(user);
+    console.log(tasks);
     const first = req.session.first_name.split("")[0];
 
     res.render("project", {
+      tasks,
+      lists,
       ...user,
       first,
 

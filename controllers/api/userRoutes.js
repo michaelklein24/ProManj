@@ -56,6 +56,35 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put('/UDS', async(req, res)=>{
+
+  try {
+    const updateUser = await User.update({
+      first_name: req.body.updateFirst,
+      last_name: req.body.updateLast,
+      password: req.body.password,
+      email: req.body.updateEmail,
+    }, {where:{
+      id: req.session.user_id
+    }}
+    )
+    req.session.save(() => {
+      req.session.logged_in = true;
+      
+      res.status(200).json(updateUser);
+    });
+
+
+    
+  } catch (err) {
+    res.status(400).json(err);
+  }
+  
+
+  
+})
+
+
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
