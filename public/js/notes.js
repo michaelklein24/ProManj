@@ -200,7 +200,7 @@ async function appendNote() {
     });
 
     newNoteContent.addEventListener('keyup', (e) => {
-        let note_title = e.target.innerHTML
+        let note_title = e.target.parentNode.parentNode.children[0].children[0].innerHTML;
         let note_content = e.target.parentNode.parentNode.children[1].children[0].innerHTML
         removeCheckMarkClasses()
 
